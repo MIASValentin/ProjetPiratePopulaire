@@ -8,6 +8,6 @@ Organisation:
   - Responsable Modèle: Petar Vukosavljevic
   - Responsable Technique: Valentin Mias
 
-Le projet sera organisé en différentes branches git hub: à chaque branche est associé un responsable du projet.
-Réunion via Discord
-Fichier spécification du jeu dans la branche main
+Le projet sera organisé en différentes branches git hub: à chaque branche est associé un responsable du projet.\
+Réunion via Discord\
+Fichier spécification du jeu dans la branche main, dans le dossier OrganisationDebut/idées jeu
