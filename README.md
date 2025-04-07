@@ -1,1 +1,2 @@
 # ProjetPiratePopulaire
+NF -> Noyau Fonctionnel
