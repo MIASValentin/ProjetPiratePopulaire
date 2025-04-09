@@ -6,8 +6,11 @@ public class Main {
 	boolean tourJoueur = true;
 	int nbTour = 0; 
 	
-	public void tourDeJeu(); 
+//	public void tourDeJeu(); 
 	
+	public static void main(String[] args) {
+		List<Carte> listCartes;
+	}
 	
 	
 }
