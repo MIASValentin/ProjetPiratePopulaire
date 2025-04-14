@@ -2,8 +2,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FabriqueDeCarte {
-
-    public static List<Carte> creerCartes() {
+	//modifier creer carte pour creer selon les paramètres
+    private List<Carte> creerCartes() {//ajouter carte.s selon param varargs
         return Arrays.asList(
             new Carte(
                 "Discours Inspirant",
@@ -28,4 +28,9 @@ public class FabriqueDeCarte {
             )
         );
     }
+    
+    public List<Carte> creerDeck(){
+    	//TODO
+    };
+    
 }

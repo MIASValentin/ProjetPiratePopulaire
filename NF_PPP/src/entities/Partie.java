@@ -18,7 +18,7 @@ public class Partie {
 				
 				//	Piocher 4 cartes
 				
-				//	Boucle de gameplay : tant que carte joués <2 || tour pas passé
+				//	Boucle de gameplay : tant que carte joués <2 && tour pas passé
 				
 				//		option de jouer une carte
 				//		si carte joué -> piocher 1 carte

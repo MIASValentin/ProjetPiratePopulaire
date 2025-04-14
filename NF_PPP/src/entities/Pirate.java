@@ -28,10 +28,10 @@ public class Pirate {
 	public void setBateau(Carte bateau) {
 		this.bateau = bateau;
 	}
-	public Set<Carte> getMain() {
+	public List<Carte> getMain() {
 		return main;
 	}
-	public void setMain(Set<Carte> main) {
+	public void setMain(List<Carte> main) {
 		this.main = main;
 	}
 	public List<Carte> getDeck() {
