@@ -23,6 +23,18 @@ public abstract class Carte implements ApplyCard {
 	};*/
 	
 	public abstract BiConsumer<Pirate, Pirate> apply();
+
+	public TypeCarte getType() {
+		return type;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public String getDescription() {
+		return description;
+	}
 	
 	
 }
