@@ -7,7 +7,7 @@ public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
 	Carte bateau; 
-	Set<Carte> main; 
+	List<Carte> main; 
 	List<Carte> deck;
 	
 	public int getPv() {
@@ -41,6 +41,7 @@ public class Pirate {
 		this.deck = deck;
 	}
 	
+	//pioche random selon modulo dans le deck
 	public void piocherCarte(); 
 	public void jouerCarte(Carte carte);
 	public void choisirDeck(List<Carte> deck); 
