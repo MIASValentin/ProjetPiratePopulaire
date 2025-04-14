@@ -4,6 +4,7 @@
  */
 package Main.tools;
 
+import java.awt.Container;
 import java.awt.Point;
 
 /**
@@ -19,6 +20,8 @@ public class Card extends javax.swing.JPanel {
     private boolean moving = false;
     private Point posPrec;
     private Point posDepart;
+    private Container zoneHand = null;
+    Container handParent;
     
     public Card() {
         initComponents();
@@ -63,16 +66,47 @@ public class Card extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //co limite zoneHand, co centre carte
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        if (zoneHand == null){
+            System.out.println("Main.tools.Card.<init>() --- 1");
+            zoneHand = this.getParent();
+            handParent = zoneHand.getParent();
+            System.out.println("Main.tools.Card.<init>() --- 2");
+        }
+       
         posPrec = evt.getPoint();
         posDepart = evt.getPoint();
         moving = true;
+        
+        //sortir du parent pour eviter bug
+        zoneHand.remove(this);
+        handParent.add(this);
+        handParent.revalidate();
+        handParent.repaint();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         posPrec = evt.getPoint();
         moving = false;
-        //TODO: si dans zoneHand => retourner a la position de départ 
+        boolean inHandX = zoneHand.getLocation().x < posPrec.x && 
+                zoneHand.getLocation().x+zoneHand.getSize().width < posPrec.x;
+        boolean inHandY = zoneHand.getLocation().y < posPrec.y && 
+                zoneHand.getLocation().y+zoneHand.getSize().height < posPrec.y;
+        
+        if (inHandX && inHandY){
+            handParent.remove(this);
+            zoneHand.add(this);
+            zoneHand.revalidate();
+            
+            setLocation(posDepart);
+        }
+        else{
+            setLocation(posPrec);
+            //carte jouée
+            System.out.println("carte jouée");
+        }
+        
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
