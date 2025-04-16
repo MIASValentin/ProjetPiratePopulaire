@@ -1,5 +1,5 @@
 package entities;
 
 public enum TypeCarte {
-	ATTAQUE, DEFENSE, BATEAU, SOUTIEN; 
+    ATTAQUE, POPULARITE, BATEAU, SOUTIEN; 
 }

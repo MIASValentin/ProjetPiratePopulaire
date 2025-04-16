@@ -41,10 +41,25 @@ public class Pirate {
 		this.deck = deck;
 	}
 	
+	
+	public void changerPv(int newValue) {
+		this.pv = this.pv + newValue; 
+	}
+	
+	public void changerPime(int newValue) {
+		this.prime = this.prime + newValue; 
+	}
+	
 	//pioche random selon modulo dans le deck
-	public void piocherCarte(); 
-	public void jouerCarte(Carte carte);
-	public void choisirDeck(List<Carte> deck); 
+	public void piocherCarte(Pioche pioche, int nbCarteAPiocher) {
+		for(int i = 0; i < 4; i++) {
+			this.main.add(pioche.donnerCarte()); 
+
+		}
+	}
+	
+//	public void jouerCarte(Carte carte);
+//	public void choisirDeck(List<Carte> deck); 
 	
 	
 	
