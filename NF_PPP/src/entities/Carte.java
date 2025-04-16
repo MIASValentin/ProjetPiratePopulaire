@@ -4,10 +4,10 @@ package entities;
 
 import java.util.function.BiConsumer;
 
-public abstract class Carte implements ApplyCard {
-    private TypeCarte type;
-    private String nom; 
-    private String description; 
+public abstract class Carte {
+    protected TypeCarte type;
+    protected String nom; 
+    protected String description; 
 
     //private int EffetJoueurPv; 
     //private int EffetJoueurPrime;
@@ -18,7 +18,7 @@ public abstract class Carte implements ApplyCard {
     //BiFunction<Integer, Integer, Integer> applyEffetPv = (PvJoueur, effet) -> pvJoueur + effet;
 
     
-    public abstract BiConsumer<Pirate, Pirate> apply();
+  
 
     public TypeCarte getType() {
         return type;

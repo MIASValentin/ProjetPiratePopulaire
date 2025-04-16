@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -7,8 +8,9 @@ public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
 	Carte bateau; 
-	List<Carte> main; 
-	List<Carte> deck;
+	List<Carte> main = new ArrayList<>();
+	List<Carte> deck = new ArrayList<>();
+
 	
 	public int getPv() {
 		return pv;
@@ -52,11 +54,21 @@ public class Pirate {
 	
 	//pioche random selon modulo dans le deck
 	public void piocherCarte(Pioche pioche, int nbCarteAPiocher) {
-		for(int i = 0; i < 4; i++) {
-			this.main.add(pioche.donnerCarte()); 
-
-		}
+	    for (int i = 0; i < nbCarteAPiocher; i++) {
+	        Carte piochee = pioche.donnerCarte();
+	        if (piochee != null) {
+	            this.main.add(piochee);
+	        }
+	    }
 	}
+	
+	public void afficherMain() {
+	    System.out.println("Main du pirate :");
+	    for (Carte c : main) {
+	        System.out.println("- " + c.getNom());
+	    }
+	}
+
 	
 //	public void jouerCarte(Carte carte);
 //	public void choisirDeck(List<Carte> deck); 

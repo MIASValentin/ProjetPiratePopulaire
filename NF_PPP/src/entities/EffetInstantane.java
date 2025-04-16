@@ -7,20 +7,20 @@ public class EffetInstantane extends Carte{
     private BiConsumer<Pirate, Pirate> effet; 
 
     public EffetInstantane(TypeCarte type, String nom, String description, BiConsumer<Pirate, Pirate> effet) {
-        super();
-        // TODO Auto-generated constructor stub
+        this.effet = effet;
+        super.type = type;
+        super.nom = nom;
+        super.description = description;
+    }
+    
+    
+    public void utiliser(Pirate j1, Pirate j2) {
+    	this.effet.accept(j1, j2); 
     }
 
-    @Override
-    public void apply(Pirate j1, Pirate j2) {
-        // TODO Auto-generated method stub
 
-    }
+	
 
-    @Override
-    public BiConsumer<Pirate, Pirate> apply() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    
 
 }
