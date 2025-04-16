@@ -17,3 +17,7 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - avancement spécification
 - drag n drop pour l'IHM
 - réalisation d'image pour expérimenter la direction d'artistique
+
+14/04 : TP encadré
+- Mise à jour des objectifs : rendre le boundary fonctionnel pour les tests, début de mise en place de l'ECB sur Main
+- 
