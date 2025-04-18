@@ -5,6 +5,11 @@ import InterfaceNF.IFabriqueDeCarte;
 public class ControlCreerDeck {
 	IFabriqueDeCarte generateur;
 	
-	public void creerDeck();
-	public void ajouterBundle();
+	public void creerDeck() {
+		
+	}
+	
+	public void creerBundle() {
+		
+	}
 }
