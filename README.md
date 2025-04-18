@@ -26,3 +26,8 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 16/04 : TP non-encadré
 - intervention du responsable Technique pour aider responsable NF
 - discussion sur les classes filles de carte
+
+18/04 : TP non-encadré
+- avancement et création de carte pour le noyau fonctionnel
+- avancement de l'ECB
+- début de discussion sur la présentation orale du 16/05
