@@ -20,4 +20,9 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 
 14/04 : TP encadré
 - Mise à jour des objectifs : rendre le boundary fonctionnel pour les tests, début de mise en place de l'ECB sur Main
-- 
+- avancée sur le boundary
+- avancée sur le NF
+
+16/04 : TP non-encadré
+- intervention du responsable Technique pour aider responsable NF
+- discussion sur les classes filles de carte
