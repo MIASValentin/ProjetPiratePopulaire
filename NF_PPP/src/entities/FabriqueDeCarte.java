@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FabriqueDeCarte {
+import InterfaceNF.ICarte;
+import InterfaceNF.IFabriqueDeCarte;
+
+
+public class FabriqueDeCarte implements IFabriqueDeCarte{
 
     // Crée un ensemble de cartes selon les paramètres
     public List<Carte> creerCartes() {
@@ -143,8 +147,16 @@ public class FabriqueDeCarte {
         ));
     }
 
-//    public List<Carte> creerDeck() {
-//        // TODO
-//    }
+	@Override
+	public List<ICarte> creerDeck() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public void ajouterBundle(List<ICarte> bundle) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
