@@ -4,19 +4,58 @@
  */
 package Main.tools;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
+
+
 /**
  *
  * @author pauli
  */
-public class ZoneImageProfil extends javax.swing.JPanel {
+public final class ZoneImageProfil extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ZoneImageProfil
-     */
+    private BufferedImage photoProfil;
+    
     public ZoneImageProfil() {
         initComponents();
+        String localPirateAdresse = (System.getProperty("user.dir"));
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        ajouterImage(path);
     }
+/**
+     * Creates new form ZoneImageProfil
+     * @param fichierImage
+     */
+       protected void ajouterImage(File fichierImage)
+{
+        try {
+            // lire l'image
+            photoProfil = ImageIO.read(fichierImage);
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    // Appel à repaint pour activer l'affichage du panneau et visualisation
+    // de l'image sur la surface du panneau. 
+    repaint(); 
+}
+
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawLine(1, 10, 20, 30);
+        if(photoProfil != null){
+            g.drawImage(photoProfil, 0, 0, null);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +69,11 @@ public class ZoneImageProfil extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 332, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 252, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
