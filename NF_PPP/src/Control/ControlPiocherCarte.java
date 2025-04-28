@@ -1,12 +1,14 @@
 package Control;
 
+import InterfaceNF.IPirate;
+
 public class ControlPiocherCarte {
 	
 	public ControlPiocherCarte() {
 		
 	}
 
-	public void piocherCarte(int i) {
+	public void piocherCarte(IPirate joueurCourant, int i) {
 		
 	}
 }

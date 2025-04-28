@@ -2,6 +2,7 @@ package boundary;
 
 import Control.*;
 import InterfaceNF.IPirate;
+import entities.Pirate;
 
 public class FrontiereTourDeJeu {
 
@@ -14,8 +15,8 @@ public class FrontiereTourDeJeu {
     private ControlEffetTour controlEffetTour;
 
     private FrontiereDemarrerPartie frontiereDemarrerPartie;
-    private IPirate joueur1;
-    private IPirate joueur2;
+    private Pirate joueur1;
+    private Pirate joueur2;
 
     public FrontiereTourDeJeu(
             ControlPiocherCarte controlPiocherCarte,
@@ -26,8 +27,8 @@ public class FrontiereTourDeJeu {
             ControlMelangerCarte controlMelangerCarte,
             ControlEffetTour controlEffetTour,
             FrontiereDemarrerPartie frontiereDemarrerPartie,
-            IPirate joueur1,
-            IPirate joueur2) 
+            Pirate joueur1,
+            Pirate joueur2) 
     {
         this.controlPiocherCarte = controlPiocherCarte;
         this.controlJouerCarte = controlJouerCarte;
@@ -47,13 +48,13 @@ public class FrontiereTourDeJeu {
         while (!controlFinDeJeu.conditionsVictoire()) {
             System.out.println("TOUR " + tour + ":");
 
-            IPirate joueurCourant = (tour % 2 == 1) ? joueur1 : joueur2;
+            Pirate joueurCourant = (tour % 2 == 1) ?  joueur1 : joueur2;
 
             //Phase de debut
             controlCreerDeck.creerBundle();
             controlChoisirBundle.selectionnerBundle();
             controlMelangerCarte.melangerDeck();
-            controlPiocherCarte.piocherCarte(4);
+            controlPiocherCarte.piocherCarte(joueurCourant, 4);
             controlEffetTour.appliquerEffetDebut();
 
             int cartesJouees = 0;
@@ -80,7 +81,7 @@ public class FrontiereTourDeJeu {
                     case 3:
                         if (cartesJouees < 2) {
                             controlJouerCarte.jouerCarte(joueurCourant);
-                            controlPiocherCarte.piocherCarte(1);
+                            controlPiocherCarte.piocherCarte(joueurCourant, 1);
                             cartesJouees++;
                         } else {
                             System.out.println("Vous avez deja joue 2 cartes.");
@@ -107,7 +108,7 @@ public class FrontiereTourDeJeu {
             //Phase de fin
             controlEffetTour.appliquerEffetFin();
             controlMelangerCarte.melangerMain();
-            controlPiocherCarte.piocherCarte(4);
+            controlPiocherCarte.piocherCarte(joueurCourant, 4);
             tour++;
         }
 

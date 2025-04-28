@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class Pirate {
+import InterfaceNF.IPirate;
+
+public class Pirate implements IPirate{
 	int pv = 10; 
 	int prime = 0; 
 	Carte bateau; 
@@ -53,6 +55,7 @@ public class Pirate {
 	}
 	
 	//pioche random selon modulo dans le deck
+	@Override
 	public void piocherCarte(Pioche pioche, int nbCarteAPiocher) {
 	    for (int i = 0; i < nbCarteAPiocher; i++) {
 	        Carte piochee = pioche.donnerCarte();
@@ -67,6 +70,21 @@ public class Pirate {
 	    for (Carte c : main) {
 	        System.out.println("- " + c.getNom());
 	    }
+	}
+
+	@Override
+	public void jouerCarte() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void choisirDeck() {
+		// TODO Auto-generated method stub
+		
+	}
+	public String getNom() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -6,6 +6,8 @@ import Control.ControlCreerDeck;
 import Control.ControlDonnerCarte;
 import InterfaceNF.ICarte;
 import InterfaceNF.IPirate;
+import entities.Carte;
+import entities.Pirate;
 
 public class FrontiereDemarrerPartie {
 	private ControlDonnerCarte controlDonnerCarte = new ControlDonnerCarte();
@@ -25,18 +27,18 @@ public class FrontiereDemarrerPartie {
 		frontiereTourDeJeu.tourDeJeu();
 	}
 	
-	public void afficherEtatJoueurs(IPirate joueur1, IPirate joueur2) {
+	public void afficherEtatJoueurs(Pirate joueur1, Pirate joueur2) {
         System.out.println("=== ÉTAT DES JOUEURS ===");
-        System.out.printf("Joueur 1: %d vie | %d popularité\n", joueur1.getPointsVie(), joueur1.getPopularite());
-        System.out.printf("Joueur 2: %d vie | %d popularité\n", joueur2.getPointsVie(), joueur2.getPopularite());
+        System.out.printf("Joueur 1: %d vie | %d popularité\n", joueur1.getPv(), joueur1.getPrime());
+        System.out.printf("Joueur 2: %d vie | %d popularité\n", joueur2.getPv(), joueur2.getPrime());
         System.out.println();
     }
 	
-	public void afficherMain(IPirate joueur) {
+	public void afficherMain(Pirate joueur) {
         System.out.println("Main de " + joueur.getNom() + " :");
-        List<ICarte> main = joueur.getMain();
+        List<Carte> main = joueur.getMain();
         for (int i = 0; i < main.size(); i++) {
-            ICarte carte = main.get(i);
+            Carte carte = main.get(i);
             System.out.printf("[%d] %s : %s (%s)\n", i + 1, carte.getNom(), carte.getDescription(), carte.getEffet());
         }
     }

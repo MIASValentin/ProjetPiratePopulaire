@@ -85,7 +85,7 @@ public class FabriqueDeCarte {
             }
         );
 
-        Carte chantDesSirènes = new EffetInstantane(
+        Carte chantDesSirenes = new EffetInstantane(
             TypeCarte.SOUTIEN,
             "Chant des Sirènes",
             "L’adversaire perd 1 point de prime, envoûté par un chant mystérieux.",
@@ -136,7 +136,7 @@ public class FabriqueDeCarte {
             carteAuTresor,
             criDeGuerre,
             tirDeCanon,
-            chantDesSirènes,
+            chantDesSirenes,
             abordage,
             tempêteEnMer,
             criDeLaKraken

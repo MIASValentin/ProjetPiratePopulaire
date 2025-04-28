@@ -32,5 +32,10 @@ public abstract class Carte {
         return description;
     }
 
+	public Object getEffet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

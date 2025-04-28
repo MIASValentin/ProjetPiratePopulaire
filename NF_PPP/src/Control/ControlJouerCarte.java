@@ -1,15 +1,18 @@
 package Control;
 
+import InterfaceNF.IPirate;
+
 public class ControlJouerCarte {
 
-	public void jouerBateau() {
+	public void jouerBateau(IPirate joueurCourant) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void jouerCarte() {
+	public void jouerCarte(IPirate joueurCourant) {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
