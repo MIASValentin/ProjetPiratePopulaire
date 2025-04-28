@@ -34,4 +34,6 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 
 28/04 : TP encadré
 - merge de la branche noyau fonctionnel dans le main pour lier l'ECB
-- 
+- mise en place des images personnalisées sur l'IHM
+- avancée sur les Control de l'ECB
+- prise en charge des premières complications du merge
