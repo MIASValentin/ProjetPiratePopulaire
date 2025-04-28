@@ -31,3 +31,7 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - avancement et création de carte pour le noyau fonctionnel
 - avancement de l'ECB
 - début de discussion sur la présentation orale du 16/05
+
+28/04 : TP encadré
+- merge de la branche noyau fonctionnel dans le main pour lier l'ECB
+- 
