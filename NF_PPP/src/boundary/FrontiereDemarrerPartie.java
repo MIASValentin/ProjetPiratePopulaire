@@ -10,9 +10,11 @@ import entities.Carte;
 import entities.Pirate;
 
 public class FrontiereDemarrerPartie {
-	private ControlDonnerCarte controlDonnerCarte = new ControlDonnerCarte();
-	private ControlCreerDeck controlCreerDeck = new ControlCreerDeck();
+	private ControlDonnerCarte controlDonnerCarte;
+	private ControlCreerDeck controlCreerDeck;
 	private FrontiereTourDeJeu frontiereTourDeJeu;
+    private Pirate joueur1;
+    private Pirate joueur2;
 	
 	public FrontiereDemarrerPartie(ControlDonnerCarte controlDonnerCarte, ControlCreerDeck controlCreerDeck, FrontiereTourDeJeu frontiereTourDeJeu) {
 	    this.controlDonnerCarte = controlDonnerCarte;
@@ -23,14 +25,18 @@ public class FrontiereDemarrerPartie {
 	public void lancerPartie() {
 		System.out.println("Bienvenue dans cette partie !");
 		controlCreerDeck.creerDeck();
-		controlDonnerCarte.donnerCarte(4);
+		// au lieu de controlDonnerCarte.donnerCarte(4);
+		controlDonnerCarte.donnerCarte(joueur1, 4);
+		controlDonnerCarte.donnerCarte(joueur2, 4);
 		frontiereTourDeJeu.tourDeJeu();
 	}
 	
-	public void afficherEtatJoueurs(Pirate joueur1, Pirate joueur2) {
+    public void afficherEtatJoueurs(Pirate joueur1, Pirate joueur2) {
         System.out.println("=== ÉTAT DES JOUEURS ===");
-        System.out.printf("Joueur 1: %d vie | %d popularité\n", joueur1.getPv(), joueur1.getPrime());
-        System.out.printf("Joueur 2: %d vie | %d popularité\n", joueur2.getPv(), joueur2.getPrime());
+        System.out.printf("Pirate 1 : %d PV | %d prime%n",
+                           joueur1.getPv(), joueur1.getPrime());
+        System.out.printf("Pirate 2 : %d PV | %d prime%n",
+        		joueur2.getPv(), joueur2.getPrime());
         System.out.println();
     }
 	
