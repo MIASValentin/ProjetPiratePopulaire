@@ -5,28 +5,23 @@ import entities.Pirate;
 import entities.Carte;
 
 public class ControlPiocherCarte {
-
     private Pioche pioche;
-    private Pirate[] pirates; // Liste des pirates (joueurs)
 
-    public ControlPiocherCarte(Pioche pioche, Pirate[] pirates) {
+    public ControlPiocherCarte(Pioche pioche) {
         this.pioche = pioche;
-        this.pirates = pirates;
     }
 
-    public void piocherCarte(int i) {
-        if (i < 0 || i >= pirates.length) {
-            System.out.println("Erreur : pirate inexistant.");
-            return;
+    /**
+     * Permet à un pirate de piocher un certain nombre de cartes.
+     */
+    public void piocherCarte(Pirate pirate, int nbCartes) {
+        for (int i = 0; i < nbCartes; i++) {
+            Carte carte = pioche.donnerCarte();
+            if (carte == null) {
+                System.out.println("La pioche est vide !");
+                break;
+            }
+            pirate.getMain().add(carte);
         }
-
-        Carte cartePiochee = pioche.piocher();
-        if (cartePiochee == null) {
-            System.out.println("La pioche est vide !");
-            return;
-        }
-
-        pirates[i].ajouterCarteMain(cartePiochee);
-        System.out.println("Le pirate " + i + " a pioché : " + cartePiochee.getNom());
     }
 }
