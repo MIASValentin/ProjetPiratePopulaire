@@ -41,7 +41,7 @@ public class FrontiereDemarrerPartie {
     }
 	
 	public void afficherMain(Pirate joueur) {
-        System.out.println("Main de " + joueur.getNom() + " :");
+        System.out.println("Main du pirate " + joueur.getNum() + " :");
         List<Carte> main = joueur.getMain();
         for (int i = 0; i < main.size(); i++) {
             Carte carte = main.get(i);

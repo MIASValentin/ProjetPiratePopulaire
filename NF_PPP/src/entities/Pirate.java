@@ -7,7 +7,7 @@ import java.util.Set;
 public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
-	int numero_joueur; 
+	int numero_joueur;
 	Carte bateau; 
 	List<Carte> main = new ArrayList<>();
 	List<Carte> deck = new ArrayList<>();
@@ -31,6 +31,9 @@ public class Pirate {
 	}
 	public void setPrime(int prime) {
 		this.prime = prime;
+	}
+	public int getNum() {
+		return numero_joueur;
 	}
 	public Carte getBateau() {
 		return bateau;

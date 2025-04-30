@@ -14,7 +14,7 @@ public class ZoneCarte {
 	}
 	
 	public void applyEffetInstantane(EffetInstantane ei, Pirate p1, Pirate p2) {
-		ei.getEffet().accept(p1, p2);
+		ei.utiliser(p1, p2);
 	}
 	
 	 public void afficherZoneDeJeu(int numeroJoueur) {
