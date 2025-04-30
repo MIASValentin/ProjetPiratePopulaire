@@ -6,6 +6,15 @@ public class Partie {
 	
 	//compteur de tour -> selon pair ou impair donne le joueur actif
 	private int nbTour = 0 ;
+	private FabriqueDeCarte fabriqueDeCarte; 
+	private Pioche pioche; 
+	
+	public Partie () {
+		this.joueur1 = new Pirate(10, 20, 1); 
+		this.joueur2 = new Pirate(10, 20, 2); 
+		this.fabriqueDeCarte = new FabriqueDeCarte(); 
+		this.pioche = new Pioche(fabriqueDeCarte.creerCartes()); 
+	}
 	
 	public void tourDeJeu() {
 		//TODO
