@@ -17,6 +17,16 @@ public class EffetInstantane extends Carte{
     public void utiliser(Pirate j1, Pirate j2) {
     	this.effet.accept(j1, j2); 
     }
+    
+    public BiConsumer<Pirate, Pirate> getEffet() {
+    	return this.effet; 
+    }
+    
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return super.nom + " : " + super.description; 
+    }
 
 
 	

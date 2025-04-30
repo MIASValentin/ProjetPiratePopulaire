@@ -4,16 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import InterfaceNF.IPirate;
-
-public class Pirate implements IPirate{
+public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
+	int numero_joueur; 
 	Carte bateau; 
 	List<Carte> main = new ArrayList<>();
 	List<Carte> deck = new ArrayList<>();
-
+ 
 	
+	
+	public Pirate(int pv, int prime, int numero_joueur) {
+		super();
+		this.pv = pv;
+		this.prime = prime;
+		this.numero_joueur = numero_joueur;
+	}
 	public int getPv() {
 		return pv;
 	}
@@ -55,7 +61,6 @@ public class Pirate implements IPirate{
 	}
 	
 	//pioche random selon modulo dans le deck
-	@Override
 	public void piocherCarte(Pioche pioche, int nbCarteAPiocher) {
 	    for (int i = 0; i < nbCarteAPiocher; i++) {
 	        Carte piochee = pioche.donnerCarte();
@@ -66,26 +71,15 @@ public class Pirate implements IPirate{
 	}
 	
 	public void afficherMain() {
-	    System.out.println("Main du pirate :");
+	    System.out.println("Main du pirate " + this.numero_joueur);
 	    for (Carte c : main) {
-	        System.out.println("- " + c.getNom());
+	        System.out.println("-" + c);
 	    }
 	}
-
-	@Override
-	public void jouerCarte() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void choisirDeck() {
-		// TODO Auto-generated method stub
-		
-	}
-	public String getNom() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	void afficherPirate() { 
+        System.out.println("Pirate " + this.numero_joueur + " | PV : " + this.pv + " | Prime : " + this.prime);
+    }
 
 	
 //	public void jouerCarte(Carte carte);
