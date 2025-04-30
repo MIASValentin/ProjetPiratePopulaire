@@ -51,8 +51,8 @@ public class FrontiereTourDeJeu {
             Pirate joueurCourant = (tour % 2 == 1) ?  joueur1 : joueur2;
 
             //Phase de debut
-            controlCreerDeck.creerBundle();
-            controlChoisirBundle.selectionnerBundle();
+            controlCreerDeck.creerDeck();
+            controlChoisirBundle.selectionnerBundle(joueurCourant, tour);
             controlMelangerCarte.melangerDeck();
             controlPiocherCarte.piocherCarte(joueurCourant, 4);
             controlEffetTour.appliquerEffetDebut();
