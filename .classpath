@@ -5,7 +5,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="NF_PPP/src"/>
 	<classpathentry kind="src" path="workspace/ECBArchitecture/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
