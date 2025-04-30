@@ -6,6 +6,9 @@ package Main.tools;
 
 import java.awt.Container;
 import java.awt.Point;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,12 +19,16 @@ public class Card extends javax.swing.JPanel {
     /**
      * Creates new form Card
      */
-    
+    private boolean neverClicked = true;
     private boolean moving = false;
     private Point posPrec;
     private Point posDepart;
-    private Container zoneHand = null;
-    Container handParent;
+    private Container zoneHand;
+    
+    private JLayeredPane layeredPane;
+    private Point location;
+    
+    
     
     public Card() {
         initComponents();
@@ -68,22 +75,21 @@ public class Card extends javax.swing.JPanel {
 
     //co limite zoneHand, co centre carte
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        if (zoneHand == null){
-            System.out.println("Main.tools.Card.<init>() --- 1");
-            zoneHand = this.getParent();
-            handParent = zoneHand.getParent();
-            System.out.println("Main.tools.Card.<init>() --- 2");
+
+        if(neverClicked){
+            neverClicked =false;
+            zoneHand = getParent();
+            layeredPane = ((JFrame) zoneHand).getLayeredPane();
+            location = this.getLocationOnScreen();
+            SwingUtilities.convertPointFromScreen(location, layeredPane);
         }
-       
+        zoneHand.remove(this);
+        this.setLocation(location);
+        layeredPane.add(this, JLayeredPane.DRAG_LAYER);
+        layeredPane.repaint();
         posPrec = evt.getPoint();
         posDepart = evt.getPoint();
         moving = true;
-        
-        //sortir du parent pour eviter bug
-        zoneHand.remove(this);
-        handParent.add(this);
-        handParent.revalidate();
-        handParent.repaint();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -94,8 +100,19 @@ public class Card extends javax.swing.JPanel {
         boolean inHandY = zoneHand.getLocation().y < posPrec.y && 
                 zoneHand.getLocation().y+zoneHand.getSize().height < posPrec.y;
         
+        // Convert location back
+        SwingUtilities.convertPointToScreen(location, layeredPane);
+        SwingUtilities.convertPointFromScreen(location, zoneHand);
+
+        // Remove from layeredPane
+        layeredPane.remove(this);
+        zoneHand.add(this);
+        this.setLocation(location);
+        zoneHand.revalidate();
+        zoneHand.repaint();
+
         if (inHandX && inHandY){
-            handParent.remove(this);
+            //handParent.remove(this);
             zoneHand.add(this);
             zoneHand.revalidate();
             
