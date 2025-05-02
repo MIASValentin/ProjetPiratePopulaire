@@ -37,3 +37,8 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - mise en place des images personnalisées sur l'IHM
 - avancée sur les Control de l'ECB
 - prise en charge des premières complications du merge
+
+02/05 : TP non-encadré
+- résolution de bug pour run le projet sur eclipse
+- début d'implémentation de tests
+- avancement des controleurs et des boundaries
