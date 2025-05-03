@@ -153,10 +153,4 @@ public class FabriqueDeCarte implements IFabriqueDeCarte{
 		return null;
 	}
 
-	@Override
-	public void ajouterBundle(List<ICarte> bundle) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

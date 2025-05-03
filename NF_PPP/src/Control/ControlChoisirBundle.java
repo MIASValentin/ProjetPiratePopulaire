@@ -5,6 +5,7 @@ import entities.Pirate;
 import entities.Carte;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ControlChoisirBundle {
 
@@ -12,16 +13,14 @@ public class ControlChoisirBundle {
 
     public ControlChoisirBundle(Pioche pioche) {
         this.pioche = pioche;
+        Stream<Carte> test;
     }
 
-    public void selectionnerBundle(Pirate pirate, int nbCartes) {
-        List<Carte> bundle = new ArrayList<>();
-        for (int i = 0; i < nbCartes; i++) {
-            Carte carte = pioche.donnerCarte();
-            if (carte != null) {
-                bundle.add(carte);
-            }
+    public void selectionnerBundle(List<ArrayList<Carte>> bundles, Pirate pirate, int numChoix) {
+        List<Carte> deck = pirate.getDeck();
+        for(int i = 0; i<bundles.get(i).size(); i++) {
+        	deck.add(bundles.get(numChoix).get(i));
         }
-        pirate.getDeck().addAll(bundle);
+        pirate.setDeck(deck);
     }
 }
