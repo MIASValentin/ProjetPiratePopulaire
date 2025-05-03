@@ -130,6 +130,13 @@ public class FabriqueDeCarte implements IFabriqueDeCarte{
                 joueur.changerPv(-1);
             }
         );
+            
+        Carte volDIdentitee = new EffetInstantane(
+        		TypeCarte.POPULARITE,
+        		"Vol d'Identité",
+        		"Vous copiez la prime de votre adversaire.",
+        		(joueur,adversaire) -> joueur.setPrime(adversaire.getPrime())
+        );
 
         return new ArrayList<>(Arrays.asList(
             discoursInspirant,
@@ -143,7 +150,8 @@ public class FabriqueDeCarte implements IFabriqueDeCarte{
             chantDesSirenes,
             abordage,
             tempêteEnMer,
-            criDeLaKraken
+            criDeLaKraken,
+            volDIdentitee
         ));
     }
 
