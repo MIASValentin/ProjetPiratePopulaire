@@ -1,6 +1,5 @@
 package Control;
 
-import entities.Pioche;
 import entities.Pirate;
 import entities.Carte;
 import java.util.ArrayList;
@@ -9,18 +8,15 @@ import java.util.stream.Stream;
 
 public class ControlChoisirBundle {
 
-    private Pioche pioche;
 
-    public ControlChoisirBundle(Pioche pioche) {
-        this.pioche = pioche;
-        Stream<Carte> test;
+    public ControlChoisirBundle() {
     }
 
-    public void selectionnerBundle(List<ArrayList<Carte>> bundles, Pirate pirate, int numChoix) {
-        List<Carte> deck = pirate.getDeck();
-        for(int i = 0; i<bundles.get(i).size(); i++) {
-        	deck.add(bundles.get(numChoix).get(i));
+    public void selectionnerBundle(List<ArrayList<Carte>> lBundle, Pirate joueur, int choix) {
+        List<Carte> deck = joueur.getDeck();
+        for(int i = 0; i<lBundle.get(i).size(); i++) {
+        	deck.add(lBundle.get(choix).get(i));
         }
-        pirate.setDeck(deck);
+        joueur.setDeck(deck);
     }
 }
