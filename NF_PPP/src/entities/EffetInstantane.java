@@ -27,10 +27,4 @@ public class EffetInstantane extends Carte{
     	// TODO Auto-generated method stub
     	return super.nom + " : " + super.description; 
     }
-
-
-	
-
-    
-
 }
