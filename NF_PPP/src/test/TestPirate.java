@@ -1,80 +1,123 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import entities.Pirate;
+import entities.Pioche;
+import entities.Carte;
+import entities.TypeCarte;
 
 public class TestPirate {
-    private Pirate pirate1;
-    private Pirate pirate2;
-    private Pirate piratedead;
-    private Pirate piratewin;
-    private Pirate tropvivant;
-    private Pirate troppopulaire;
+    private Pirate pirate;
+    private List<Carte> cartesPioche;
+    private final PrintStream standardOut = System.out;
+    private ByteArrayOutputStream outputStream;
 
-    private List<LambdaTestStructure> listeTest = new ArrayList<>();
-
-    public class LambdaTestStructure {
-        protected Pirate pirate;
-        protected Object result;
-
-        public LambdaTestStructure(Pirate pirate, Object result) {
-            this.pirate = pirate;
-            this.result = result;
+    private static class TestCarte extends Carte {
+        public TestCarte(TypeCarte type, String nom, String description) {
+            this.type = type;
+            this.nom = nom;
+            this.description = description;
+        }
+        @Override
+        public String toString() {
+            return nom;
         }
     }
 
     @BeforeEach
-    public void setUp() {
-        pirate1 = new Pirate(5, 0, 1);
-        pirate2 = new Pirate(5, 0, 2);
-        piratedead = new Pirate(0, 0, 0);
-        piratewin = new Pirate(5, 5, 0);
-        tropvivant = new Pirate(10, 0, 0);
-        troppopulaire = new Pirate(5, 10, 0);
-        listeTest.clear();
+    void setUp() {
+        pirate = new Pirate(5, 2, 1);
+        cartesPioche = new ArrayList<>();
+        cartesPioche.add(new TestCarte(TypeCarte.ATTAQUE, "A1", "Attaque 1"));
+        cartesPioche.add(new TestCarte(TypeCarte.POPULARITE, "P1", "Popularité 1"));
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.setOut(standardOut);
     }
 
     @Test
-    public void testGettersSetters() {
-        listeTest.add(new LambdaTestStructure(pirate1, new Object[]{5, 0, 1}));
-        listeTest.add(new LambdaTestStructure(pirate2, new Object[]{5, 0, 2}));
-        listeTest.add(new LambdaTestStructure(piratedead, new Object[]{0, 0, 0}));
-        listeTest.add(new LambdaTestStructure(piratewin, new Object[]{5, 5, 0}));
-        listeTest.add(new LambdaTestStructure(tropvivant, new Object[]{10, 0, 0}));
-        listeTest.add(new LambdaTestStructure(troppopulaire, new Object[]{5, 10, 0}));
+    void testGettersAndSetters() {
+        // PV, Prime, Num
+        assertEquals(5, pirate.getPv());
+        assertEquals(2, pirate.getPrime());
+        assertEquals(1, pirate.getNum());
 
-        Consumer<LambdaTestStructure> consumerTest = (LambdaTestStructure elt) -> {
-            assertEquals(((Object[]) elt.result)[0], elt.pirate.getPv());
-            assertEquals(((Object[]) elt.result)[1], elt.pirate.getPrime());
-            assertEquals(((Object[]) elt.result)[2], elt.pirate.getNum());
-        };
+        pirate.setPv(8);
+        pirate.setPrime(4);
+        assertEquals(8, pirate.getPv());
+        assertEquals(4, pirate.getPrime());
 
-        listeTest.stream().forEach(consumerTest);
+        // Bateau
+        assertNull(pirate.getBateau());
+        TestCarte bateau = new TestCarte(TypeCarte.BATEAU, "B1", "Bateau");
+        pirate.setBateau(bateau);
+        assertEquals(bateau, pirate.getBateau());
 
-        pirate1.setPv(7);
-        pirate1.setPrime(3);
-        assertEquals(7, pirate1.getPv());
-        assertEquals(3, pirate1.getPrime());
+        // Main
+        assertTrue(pirate.getMain().isEmpty());
+        List<Carte> newMain = new ArrayList<>();
+        newMain.add(bateau);
+        pirate.setMain(newMain);
+        assertEquals(newMain, pirate.getMain());
+
+        // Deck
+        assertTrue(pirate.getDeck().isEmpty());
+        List<Carte> newDeck = new ArrayList<>();
+        newDeck.add(cartesPioche.get(0));
+        pirate.setDeck(newDeck);
+        assertEquals(newDeck, pirate.getDeck());
     }
 
     @Test
-    public void testChangerPvEtPrime() {
-        pirate1.changerPv(-2);
-        pirate1.changerPime(5);
-        assertEquals(3, pirate1.getPv());
-        assertEquals(5, pirate1.getPrime());
+    void testChangerPvEtPrime() {
+        pirate.changerPv(-3);
+        pirate.changerPime(5);
+        assertEquals(2, pirate.getPv());
+        assertEquals(7, pirate.getPrime());
+    }
 
-        tropvivant.changerPv(5);
-        troppopulaire.changerPime(-3);
-        assertEquals(15, tropvivant.getPv());
-        assertEquals(7, troppopulaire.getPrime());
+    @Test
+    void testPiocherCarte() {
+        Pioche pioche = new Pioche(new ArrayList<>(cartesPioche));
+        pirate.getMain().clear();
+        pirate.piocherCarte(pioche, 1);
+        assertEquals(1, pirate.getMain().size(), "Doit piocher une carte");
+        // Piocher plus que disponible
+        pirate.piocherCarte(pioche, 5);
+        assertEquals(cartesPioche.size(), pirate.getMain().size(), "Ne doit pas dépasser le nombre de cartes disponibles");
+    }
+
+    @Test
+    void testAfficherMain() {
+        pirate.getMain().clear();
+        pirate.getMain().add(cartesPioche.get(0));
+        pirate.getMain().add(cartesPioche.get(1));
+        pirate.afficherMain();
+        String[] lines = outputStream.toString().trim().split(System.lineSeparator());
+        assertEquals("Main du pirate 1", lines[0]);
+        assertEquals("-A1", lines[1]);
+        assertEquals("-P1", lines[2]);
+    }
+
+    @Test
+    void testAfficherPirate() {
+        outputStream.reset();
+        pirate.afficherPirate();
+        String expected = "Pirate 1 | PV : 5 | Prime : 2";
+        assertEquals(expected, outputStream.toString().trim());
     }
 }
