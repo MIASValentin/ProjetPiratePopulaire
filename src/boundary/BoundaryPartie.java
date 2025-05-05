@@ -1,24 +1,40 @@
 package boundary;
 
 import control.ControlPartie;
+import entities.Carte;
 import entities.Pirate;
 
 public class BoundaryPartie {
-	//LancerPartie, 
-	private Pirate joueur1; 
-	private Pirate joueur2;
-	
 	private ControlPartie controlPartie;
-
-	public BoundaryPartie(Pirate joueur1, Pirate joueur2, ControlPartie controlPartie) {
-		this.joueur1 = joueur1;
-		this.joueur2 = joueur2;
-		this.controlPartie = controlPartie;
-	} 
 	
-	public void LancerPartie () {
-		
+	public BoundaryPartie(ControlPartie controlPartie) {
+		this.controlPartie = controlPartie;
+	}
+
+
+	public boolean estPartieFini() {
+		return controlPartie.estPartieFini(); 
 	}
 	
+	public int getTourJoueur() {
+		return controlPartie.getTourJoueur(); 
+	}
 	
+	public void passerAuTourSuivant() {
+		controlPartie.passerAuTourSuivant(); 
+	}
+
+
+	public void initPartie() {
+		controlPartie.initPartie(); 
+		
+	}
+
+
+	public void afficherMain(int numJoueur) {
+	    System.out.println("Joueur " + numJoueur + " : dans ma main il y a : ");
+	    for (Carte c : controlPartie.getMain(numJoueur)) {
+	        System.out.println(c.toString());
+	    }
+	}
 }

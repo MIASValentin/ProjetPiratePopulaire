@@ -47,10 +47,10 @@ public class Pirate {
 	public void setMain(List<Carte> main) {
 		this.main = main;
 	}
-	public List<Carte> getDeck() {
+	public Deck getDeck() {
 		return deck;
 	}
-	public void setDeck(List<Carte> deck) {
+	public void setDeck(Deck deck) {
 		this.deck = deck;
 	}
 	
@@ -64,9 +64,9 @@ public class Pirate {
 	}
 	
 	//pioche random selon modulo dans le deck
-	public void piocherCarte(Deck pioche, int nbCarteAPiocher) {
+	public void piocherCarte(int nbCarteAPiocher) {
 	    for (int i = 0; i < nbCarteAPiocher; i++) {
-	        Carte piochee = pioche.donnerCarte();
+	        Carte piochee = deck.donnerCarte();
 	        if (piochee != null) {
 	            this.main.add(piochee);
 	        }
