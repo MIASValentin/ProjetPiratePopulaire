@@ -42,3 +42,8 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - résolution de bug pour run le projet sur eclipse
 - début d'implémentation de tests
 - avancement des controleurs et des boundaries
+  
+05/05 : TP encadré
+- mise au propre de l'ECB -> control et boundary
+- mise au propre de l'IHM
+- changement de branche
