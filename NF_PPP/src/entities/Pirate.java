@@ -10,7 +10,7 @@ public class Pirate {
 	int numero_joueur;
 	Carte bateau; 
 	List<Carte> main = new ArrayList<>();
-	List<Carte> deck = new ArrayList<>();
+	Deck deck = new Deck(); 
  
 	
 	
@@ -64,7 +64,7 @@ public class Pirate {
 	}
 	
 	//pioche random selon modulo dans le deck
-	public void piocherCarte(Pioche pioche, int nbCarteAPiocher) {
+	public void piocherCarte(Deck pioche, int nbCarteAPiocher) {
 	    for (int i = 0; i < nbCarteAPiocher; i++) {
 	        Carte piochee = pioche.donnerCarte();
 	        if (piochee != null) {
@@ -80,7 +80,7 @@ public class Pirate {
 	    }
 	}
 	
-	public void afficherPirate() { 
+	void afficherPirate() { 
         System.out.println("Pirate " + this.numero_joueur + " | PV : " + this.pv + " | Prime : " + this.prime);
     }
 

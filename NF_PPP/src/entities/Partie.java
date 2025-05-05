@@ -6,40 +6,12 @@ public class Partie {
 	
 	//compteur de tour -> selon pair ou impair donne le joueur actif
 	private int nbTour = 0 ;
-	private FabriqueDeCarte fabriqueDeCarte; 
-	private Pioche pioche; 
+	private Deck pioche = new Deck(); 
 	
-	public Partie () {
+	public Partie (Pirate joueur1, Pirate joueur2) {
 		this.joueur1 = new Pirate(10, 20, 1); 
 		this.joueur2 = new Pirate(10, 20, 2); 
-		this.fabriqueDeCarte = new FabriqueDeCarte(); 
-		this.pioche = new Pioche(fabriqueDeCarte.creerCartes()); 
+		
 	}
 	
-	public void tourDeJeu() {
-		//TODO
-		//Initialisiation
-				//création des decks
-				
-				//boucle qui alterne entre les deux pirates :
-				
-				//	Choisir bundle (post CGminimal)
-				
-				//	Piocher 4 cartes
-				
-				//	Boucle de gameplay : tant que carte joués <2 && tour pas passé
-				
-				//		option de jouer une carte
-				//		si carte joué -> piocher 1 carte
-				
-				//		option de passer le tour
-				
-				//	Vérifier condition de victoire
-				//	vie de l'adversaire ?
-				//	prime à 1 millions ?
-				
-				// shuffle la main dans le deck
-				
-				//fin de partie : gloire au gagnant et honte au vaincu
-	}
 }

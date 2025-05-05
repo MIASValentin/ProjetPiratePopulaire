@@ -1,7 +1,5 @@
 package entities;
 
-
-
 import java.util.function.BiConsumer;
 
 public abstract class Carte {
