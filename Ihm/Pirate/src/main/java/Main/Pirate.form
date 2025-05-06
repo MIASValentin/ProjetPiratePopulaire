@@ -29,15 +29,15 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="zoneImageProfil2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
-                      <Component id="barreDeVie1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                      <Component id="zonePV1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="355" max="-2" attributes="0"/>
                       <Component id="card1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="635" max="32767" attributes="0"/>
+              <EmptySpace pref="728" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,11 +50,11 @@
                       <Component id="zoneImageProfil2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="barreDeVie1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                      <Component id="zonePV1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
               <Component id="card1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="287" max="32767" attributes="0"/>
           </Group>
@@ -92,17 +92,17 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="Main.tools.BarreDeVie" name="barreDeVie1">
+    <Container class="Main.tools.ZonePV" name="zonePV1">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="396" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="363" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="153" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

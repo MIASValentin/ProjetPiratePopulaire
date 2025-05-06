@@ -4,19 +4,36 @@
  */
 package Main.tools;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author pauli
  */
 public class ZonePV extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ZonePV
-     */
+    private int maxHealth = 10;
+    private int health = 9;
+    
+    private Image image;
+    private int healthBarSize;
+    
     public ZonePV() {
         initComponents();
+        String localPirateAdresse = (System.getProperty("user.dir"));
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        ajouterImage(path);
+        repaint();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +55,33 @@ public class ZonePV extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    protected void ajouterImage(File fichierImage){
+        try {
+            // lire l'image
+            image = ImageIO.read(fichierImage);
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        if(image != null){
+            image = image.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(image, 0, 0, null);
+        }
+        healthBarSize = getWidth()/2;
+        int endHealthWidth = (health*healthBarSize)/maxHealth;
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.red);
+        g2.drawLine(getWidth()/4, getHeight()/2, getWidth()/4+endHealthWidth, getHeight()/2);
+        if (health!=maxHealth){
+            g2.setColor(Color.black);
+            g2.drawLine(getWidth()/4+endHealthWidth, getHeight()/2, getWidth()/4+healthBarSize, getHeight()/2);            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
