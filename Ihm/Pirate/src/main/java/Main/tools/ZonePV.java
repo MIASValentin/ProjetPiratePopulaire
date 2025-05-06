@@ -20,9 +20,10 @@ import javax.imageio.ImageIO;
  * @author pauli
  */
 public class ZonePV extends javax.swing.JPanel {
-
+    //les variables suivantes seront changées par des gets au code eclipse
     private int maxHealth = 10;
     private int health = 9;
+    //-----------------------------------------------------------------------
     
     private Image image;
     private int healthBarSize;

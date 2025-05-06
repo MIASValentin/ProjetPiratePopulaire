@@ -4,18 +4,38 @@
  */
 package Main.tools;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author pauli
  */
 public class ZonePopularite extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ZonePopularite
-     */
+    //les variables suivantes seront changées par des gets au code eclipse---
+    private int maxPop = 40000;
+    private int pop = 30000;
+    //-----------------------------------------------------------------------
+    
+    private Image image;
+    private int popBarSize;
+    
     public ZonePopularite() {
         initComponents();
+        String localPirateAdresse = (System.getProperty("user.dir"));
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        ajouterImage(path);
+        repaint();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,15 +50,43 @@ public class ZonePopularite extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 199, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    protected void ajouterImage(File fichierImage){
+        try {
+            // lire l'image
+            image = ImageIO.read(fichierImage);
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        if(image != null){
+            image = image.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(image, 0, 0, null);
+        }
+        popBarSize = getHeight()/2;
+        int endHealthHeight = popBarSize-((pop*popBarSize)/maxPop);
+        g2.setStroke(new BasicStroke(3));
+        if (pop!=maxPop){
+            g2.setColor(Color.black);
+            g2.drawLine(getWidth()/2, getHeight()/4, getWidth()/2, getHeight()/4+endHealthHeight);            
+        }
+        g2.setColor(Color.blue);
+        g2.drawLine(getWidth()/2, getHeight()/4+endHealthHeight, getWidth()/2, getHeight()/4+popBarSize);
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
