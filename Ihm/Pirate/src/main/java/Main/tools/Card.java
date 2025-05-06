@@ -12,6 +12,12 @@ import java.awt.Point;
  * @author pauli
  */
 public class Card extends javax.swing.JPanel {
+    //les variables suivantes seront changées par des gets au code eclipse
+    private String nomCarte = "nom de carte";
+    private String descCarte= "description de la carte de  plusieurs issues possibles";
+    private String attCarte = "Attaque: 5";
+    private String popCarte = "Popularite: 5"; 
+    //-----------------------------------------------------------------------
 
     /**
      * Creates new form Card
@@ -25,6 +31,10 @@ public class Card extends javax.swing.JPanel {
     
     public Card() {
         initComponents();
+        CardName.setText(nomCarte);
+        CardDescription.setText("<html>"+descCarte+"</html>");
+        CardAttaque.setText(attCarte);
+        CardPopularite.setText(popCarte);
     }
 
     /**
@@ -36,7 +46,12 @@ public class Card extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(0, 102, 204));
+        CardName = new javax.swing.JLabel();
+        CardPopularite = new javax.swing.JLabel();
+        CardAttaque = new javax.swing.JLabel();
+        CardDescription = new javax.swing.JLabel();
+
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setMaximumSize(new java.awt.Dimension(90, 130));
         setMinimumSize(new java.awt.Dimension(90, 130));
         setName("Cartes"); // NOI18N
@@ -54,15 +69,39 @@ public class Card extends javax.swing.JPanel {
             }
         });
 
+        CardName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CardName.setText("Nom de la carte");
+
+        CardPopularite.setText("Popularité: 0");
+
+        CardAttaque.setText("Attaque: 0");
+
+        CardDescription.setText("zefzerzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CardDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CardName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CardPopularite, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CardAttaque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(CardName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CardDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CardPopularite)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(CardAttaque)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -96,5 +135,9 @@ public class Card extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CardAttaque;
+    private javax.swing.JLabel CardDescription;
+    private javax.swing.JLabel CardName;
+    private javax.swing.JLabel CardPopularite;
     // End of variables declaration//GEN-END:variables
 }
