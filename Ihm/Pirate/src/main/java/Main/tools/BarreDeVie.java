@@ -4,17 +4,35 @@
  */
 package Main.tools;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author etudiant
  */
 public class BarreDeVie extends javax.swing.JPanel {
-
-    /**
-     * Creates new form BarreDeVie
-     */
+    //TODO: faire venir les données nécessaires, variables a remplacer ce dessous:
+    private int maxHealth = 10;
+    private int health = 9;
+    
+    private Image image;
+    private int healthBarSize;
+    
     public BarreDeVie() {
         initComponents();
+        String localPirateAdresse = (System.getProperty("user.dir"));
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        ajouterImage(path);
+        repaint();
     }
 
     /**
@@ -26,25 +44,45 @@ public class BarreDeVie extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
-
-        jProgressBar1.setForeground(new java.awt.Color(255, 0, 0));
-        jProgressBar1.setFocusable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    protected void ajouterImage(File fichierImage){
+        try {
+            // lire l'image
+            image = ImageIO.read(fichierImage);
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        if(image != null){
+            image = image.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(image, 0, 0, null);
+        }
+        healthBarSize = getWidth()/2;
+        int endHealthWidth = (health*healthBarSize)/maxHealth;
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.red);
+        g2.drawLine(getWidth()/4, getHeight()/2, getWidth()/4+endHealthWidth, getHeight()/2);
+        if (health!=maxHealth){
+            g2.setColor(Color.black);
+            g2.drawLine(getWidth()/4+endHealthWidth, getHeight()/2, getWidth()/4+healthBarSize, getHeight()/2);            
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }
