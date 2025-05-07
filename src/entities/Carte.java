@@ -1,12 +1,11 @@
 package entities;
 
-import java.util.function.BiConsumer;
-
 public abstract class Carte {
     protected TypeCarte type;
     protected String nom; 
     protected String description; 
 
+<<<<<<< HEAD
     //private int EffetJoueurPv; 
     //private int EffetJoueurPrime;
 
@@ -18,6 +17,8 @@ public abstract class Carte {
     
   
 
+=======
+>>>>>>> 77b3eab9d2003edede2e220afb00983af0e94135
     public TypeCarte getType() {
         return type;
     }
@@ -29,11 +30,4 @@ public abstract class Carte {
     public String getDescription() {
         return description;
     }
-
-	public Object getEffet() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

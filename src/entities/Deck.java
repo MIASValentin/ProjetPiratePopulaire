@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Stream;
+import java.util.Random;
 
 public class Deck {
 	
@@ -22,12 +24,36 @@ public class Deck {
 		return cartes; 
 	}
 	
+	public void setCartes(List<Carte> cartes) {
+		this.cartes = cartes;
+	}
+	
 	public void afficherPioche() {
 	    System.out.println("Contenu de la pioche :");
 	    for (Carte c : cartes) {
 	        System.out.println("- " + c.getNom());
 	    }
 	}
+	
+	public List<ArrayList<Carte>> creerBundle() {
+    	int nb_carte_bundle = 3;
+    	int nb_bundle = 3;
+    	
+    	Random rd = new Random(); 
+    	List<Carte> nouvellesCartes = creerCartes();
+    	List<Carte> cartesBundle = Stream.generate(()->nouvellesCartes.
+    			get(rd.nextInt(nouvellesCartes.size()-1)))
+    			.limit(nb_carte_bundle*nb_bundle).toList();
+    	
+    	List<ArrayList<Carte>> rslt = new ArrayList<ArrayList<Carte>>();
+    	rslt = Stream.of(new ArrayList<Carte>(), new ArrayList<Carte>(), new ArrayList<Carte>()).toList();
+    	
+    	for (int i=0; i<nb_carte_bundle*nb_bundle; i++) {
+    		rslt.get(i/nb_bundle).add(cartesBundle.get(i));
+    	}
+    	
+    	return rslt;
+    }
 	
 	public Carte donnerCarte() {
 	    if (cartes.isEmpty()) {
