@@ -8,17 +8,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import entities.FabriqueDeCarte;
-import entities.Carte;
-import entities.TypeCarte;
-import entities.EffetInstantane;
-import InterfaceNF.ICarte;
+import entities.*;
+//import InterfaceNF.ICarte;
 
 public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_NotNullAndSize() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+        Deck fab = new Deck();
         List<Carte> cartes = fab.creerCartes();
         assertNotNull(cartes, "La liste retournée par creerCartes ne doit pas être null");
         assertEquals(13, cartes.size(), "La fabrique doit créer exactement 13 cartes");
@@ -26,7 +23,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_TypeDistribution() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         List<Carte> cartes = fab.creerCartes();
         long nbAttaque    = cartes.stream().filter(c -> c.getType() == TypeCarte.ATTAQUE).count();
         long nbSoutien    = cartes.stream().filter(c -> c.getType() == TypeCarte.SOUTIEN).count();
@@ -38,7 +35,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_UniqueNames() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         List<Carte> cartes = fab.creerCartes();
         Set<String> noms = cartes.stream()
                                   .map(Carte::getNom)
@@ -48,7 +45,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_ContainsExpectedCardNames() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         Set<String> noms = fab.creerCartes().stream()
                                       .map(Carte::getNom)
                                       .collect(Collectors.toSet());
@@ -58,14 +55,14 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerDeck_NotImplemented() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
-        List<ICarte> deck = fab.creerDeck();
+    	Deck fab = new Deck();
+        List<Carte> deck = fab.creerCartes();
         assertNull(deck, "creerDeck n'est pas implémenté et doit renvoyer null");
     }
 
     @Test
     public void testCreerCartes_NoBateauCards() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         long nbBateau = fab.creerCartes().stream()
                           .filter(c -> c.getType() == TypeCarte.BATEAU)
                           .count();
@@ -74,7 +71,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_OrderFirstAndLast() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         List<Carte> cartes = fab.creerCartes();
         assertEquals("Discours Inspirant", cartes.get(0).getNom(), "La première carte doit être 'Discours Inspirant'");
         assertEquals("Vol d'Identité",      cartes.get(cartes.size() - 1).getNom(),
@@ -83,7 +80,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_AllInstancesEffetInstantane() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         List<Carte> cartes = fab.creerCartes();
         for (Carte c : cartes) {
             assertTrue(c instanceof EffetInstantane, "Chaque carte doit être une instance de EffetInstantane");
@@ -92,7 +89,7 @@ public class TestFabriqueDeCarte {
 
     @Test
     public void testCreerCartes_ModificationDoesNotAffectNewInstance() {
-        FabriqueDeCarte fab = new FabriqueDeCarte();
+    	Deck fab = new Deck();
         List<Carte> first = fab.creerCartes();
         first.clear();
         assertEquals(0, first.size(), "La liste modifiée doit refléter la suppression");
