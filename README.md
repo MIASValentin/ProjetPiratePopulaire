@@ -47,3 +47,8 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - mise au propre de l'ECB -> control et boundary
 - mise au propre de l'IHM
 - changement de branche
+
+07/05 : TP non-encadré
+- avancée sur l'ECB
+- mise en commun des avancements sur l'IHM
+- mise en commun des avancements sur les tests
