@@ -2,6 +2,12 @@ package Main;
 
 import java.awt.Point;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,11 +20,18 @@ import java.awt.Graphics;
  */
 public class Pirate extends javax.swing.JFrame {
     Point TailleZoneHand = new Point(800, 500);
+    Image pirateIcon;
     
     /**
      * Creates new form Pirate
      */
     public Pirate() {
+        File path = new File(System.getProperty("user.dir") + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        try {
+            pirateIcon = ImageIO.read(path);
+        } catch (IOException ex) {
+            Logger.getLogger(Pirate.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         repaint();
     }
@@ -39,6 +52,7 @@ public class Pirate extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PiratePopulaire");
+        setIconImage(pirateIcon);
         setResizable(false);
 
         zoneImageProfil2.setPreferredSize(new java.awt.Dimension(300, 300));
@@ -85,12 +99,10 @@ public class Pirate extends javax.swing.JFrame {
                 .addComponent(card1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(341, 988, Short.MAX_VALUE)
                         .addComponent(zonePopularite1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(zoneImageProfil2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
