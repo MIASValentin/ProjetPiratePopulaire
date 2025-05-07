@@ -14,6 +14,10 @@ public class Partie {
 		this.nbTour = nbTour; 
 	}
 	
+	public ZoneCarte getZoneCarte() {
+		return this.zoneCarte; 
+	}
+	
 	public Partie (Pirate joueur1, Pirate joueur2, ZoneCarte zoneCarte) {
 		this.joueur1 = joueur1; 
 		this.joueur2 = joueur2; 
@@ -26,5 +30,6 @@ public class Partie {
 		if(numJoueur == 1) return joueur1; 
 		else return joueur2; 
 	 }
+	
 	
 }

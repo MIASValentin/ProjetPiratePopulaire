@@ -37,4 +37,14 @@ public class BoundaryPartie {
 	        System.out.println(c.toString());
 	    }
 	}
+	
+	public void afficherTourJoueur(int numJoueur) {
+		controlPartie.afficherTourJoueur(numJoueur); 
+	}
+
+
+	public void subirDegat(int degat) {
+		System.out.println("Aie !");
+	}
+	
 }

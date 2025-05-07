@@ -41,12 +41,36 @@ public class ControlPartie {
 	}
 
 	public void initPartie() {
-		joueur1.piocherCarte(5);
+		joueur1.piocherCarte(4);
+		joueur2.piocherCarte(4);
 	}
 	
 	public List<Carte> getMain(int numJoueur) {
 		if (numJoueur == 1) return joueur1.getMain(); 
 		else return joueur2.getMain(); 
+	}
+	
+	public Pirate getPirateNumJoueur(int numJoueur) {
+		if(numJoueur == 1) return joueur1; 
+		else return joueur2; 
+	}
+	
+
+	public Pirate getPirateDuTour() {
+		return getPirateNumJoueur(getTourJoueur()); 
+	}
+	
+	public Pirate getAutrePirate() {
+		if (getTourJoueur() == 1) return getPirateNumJoueur(2); 
+		else return getPirateNumJoueur(1); 
+	}
+
+	public void afficherTourJoueur(int numJoueur) {
+		System.out.println("Tour du joueur " + String.valueOf(numJoueur));
+		Pirate joueur = getPirateNumJoueur(numJoueur); 
+		joueur.afficherMain();
+		partie.getZoneCarte().afficherZoneDeJeu(numJoueur);
+		
 	}
 
 

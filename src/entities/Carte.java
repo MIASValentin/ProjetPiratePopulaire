@@ -13,7 +13,7 @@ public abstract class Carte {
     //private int EffetAutreJoueurPv; 
     //private int EffetAutreJoueurPrime; 
 
-    //BiFunction<Integer, Integer, Integer> applyEffetPv = (PvJoueur, effet) -> pvJoueur + effet;
+    
 
     
   
