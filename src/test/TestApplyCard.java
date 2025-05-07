@@ -2,9 +2,11 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.function.BiConsumer;
+
 import org.junit.jupiter.api.Test;
 
-import entities.ApplyCard;
+
 import entities.Pirate;
 
 public class TestApplyCard {
@@ -16,13 +18,13 @@ public class TestApplyCard {
         Pirate p2 = new Pirate(8, 2, 2);
 
         // Dummy ApplyCard: réduit PV de p1 et augmente prime de p2
-        ApplyCard impl = (j1, j2) -> {
+        BiConsumer<Pirate, Pirate> impl = (j1, j2) -> {
             j1.setPv(j1.getPv() - 3);
             j2.setPrime(j2.getPrime() + 5);
         };
 
         // Application
-        impl.apply(p1, p2);
+        impl.accept(p1, p2);
 
         // Vérification des effets
         assertEquals(7, p1.getPv(), "Le PV de p1 doit être diminué de 3");
@@ -32,9 +34,9 @@ public class TestApplyCard {
     @Test
     void testImplementationClassReference() {
         // Vérifie que l'interface est bien utilisée comme type
-        ApplyCard dummy = new ApplyCard() {
+        BiConsumer<Pirate, Pirate> dummy = new BiConsumer<Pirate, Pirate>() {
             @Override
-            public void apply(Pirate j1, Pirate j2) {
+            public void accept(Pirate j1, Pirate j2) {
                 // Aucune modification
             }
         };
