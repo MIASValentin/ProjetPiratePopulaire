@@ -6,6 +6,8 @@ package Main.tools;
 
 import java.awt.Container;
 import java.awt.Point;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -22,10 +24,12 @@ public class Card extends javax.swing.JPanel {
     /**
      * Creates new form Card
      */
+    private boolean inHand = true;
     private boolean moving = false;
     private Point posPrec;
     private Point posDepart;
     private Container zoneHand;
+    private JFrame frame;
     
     
     
@@ -35,7 +39,21 @@ public class Card extends javax.swing.JPanel {
         CardDescription.setText("<html>"+descCarte+"</html>");
         CardAttaque.setText(attCarte);
         CardPopularite.setText(popCarte);
+        //getParent().setComponentZOrder(this, 0);
     }
+
+    @Override
+    public void addNotify() {
+        super.addNotify(); 
+        zoneHand = this.getParent();
+        frame= (JFrame) SwingUtilities.getWindowAncestor(this);
+        System.out.println(zoneHand.toString());
+        System.out.println(frame);
+        
+    }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,21 +125,35 @@ public class Card extends javax.swing.JPanel {
 
     //co limite zoneHand, co centre carte
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        posPrec = evt.getPoint();
-        posDepart = evt.getPoint();
-        moving = true;
+        if(inHand){
+            posPrec = evt.getPoint();
+            posDepart = evt.getPoint();
+            zoneHand.remove(this);
+            frame.add(this);
+            moving = true;
+        }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         Point location = getLocation();
-        int xCentreCarte = location.x + getWidth()/2;
-        int yCentreCarte = location.y + getHeight()/2;
+        Point CentreCarte = new Point(getLocationOnScreen().x + getWidth()/2
+                            ,getLocationOnScreen().y + getHeight()/2);
+        Point basDroiteHand = new Point(zoneHand.getLocationOnScreen().x + zoneHand.getWidth()/2
+                            ,zoneHand.getLocationOnScreen().y + zoneHand.getHeight()/2);
         
-        if (zoneHand.getBounds().contains(new Point(xCentreCarte, yCentreCarte))){
+        if (zoneHand.getLocationOnScreen().x<CentreCarte.x && CentreCarte.x<basDroiteHand.x &&
+                zoneHand.getLocationOnScreen().y<CentreCarte.y && CentreCarte.y<basDroiteHand.y){
             //toujours dans hand
+            moving =false;
+            System.out.println("Main.tools.Card.formMouseReleased()\n\n");
+            frame.remove(this);
             zoneHand.add(this);
-        }else{
-            //jouer la carte
+        }else{ 
+            if(inHand){
+                inHand=false;
+                moving =false;
+                System.out.println("LIBRE  / / / / /");
+            }
         }
         
     }//GEN-LAST:event_formMouseReleased
