@@ -66,11 +66,22 @@ public class ControlPartie {
 	}
 
 	public void afficherTourJoueur(int numJoueur) {
-		System.out.println("Tour du joueur " + String.valueOf(numJoueur));
-		Pirate joueur = getPirateNumJoueur(numJoueur); 
-		joueur.afficherMain();
-		partie.getZoneCarte().afficherZoneDeJeu(numJoueur);
 		
+	}
+
+	public void jouerTourDeJeu() {
+		// incrémenter le nombre de tour 
+		partie.setNbTour(primeAAtteindre);
+		
+	}
+
+	public void afficherZoneDeCarte() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getNumeroTour() {
+		return partie.getNbTour(); 
 	}
 
 

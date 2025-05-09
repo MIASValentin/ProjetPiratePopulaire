@@ -23,7 +23,7 @@ public class Main {
 		ControlPartie controlPartie = new ControlPartie(partie); 
 		ControlJouerCarte controlJouerCarte = new ControlJouerCarte(controlPartie); 
 		
-		BoundaryPartie boundaryPartie = new BoundaryPartie(controlPartie); 
+		BoundaryPartie boundaryPartie = new BoundaryPartie(controlPartie, controlJouerCarte); 
 		BoundaryJouerCarte boundaryJouerCarte = new BoundaryJouerCarte(controlJouerCarte); 
 		
 		boundaryPartie.initPartie(); // pioche des 4 cartes
