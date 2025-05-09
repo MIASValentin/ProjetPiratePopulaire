@@ -83,6 +83,10 @@ public class ControlPartie {
 	public int getNumeroTour() {
 		return partie.getNbTour(); 
 	}
+	
+	public String afficherPirate() {
+		return getPirateDuTour().afficherPirate();
+	}
 
 
 }

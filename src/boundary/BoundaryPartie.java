@@ -70,4 +70,8 @@ public class BoundaryPartie {
 		
 	}
 	
+	public void afficherPirate() {
+		System.out.println(controlPartie.afficherPirate());
+	}
+	
 }

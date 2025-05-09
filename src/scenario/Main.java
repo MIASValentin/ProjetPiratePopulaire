@@ -43,7 +43,8 @@ public class Main {
 			// Subir les dégats 
 			if(boundaryPartie.getTourJoueur() == 1) boundaryPartie.subirDegat(1); else boundaryPartie.subirDegat(2); 
 			
-			
+			// Afficher pirate
+			boundaryPartie.afficherPirate();
 		}
 		
 		
