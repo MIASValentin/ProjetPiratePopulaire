@@ -73,11 +73,12 @@ public class Pirate {
 	    }
 	}
 	
-	public void afficherMain() {
-	    System.out.println("Main du pirate " + this.numero_joueur);
+	public String afficherMain() {
+	    String s = ("Main du pirate " + this.numero_joueur + "\n");
 	    for (Carte c : main) {
-	        System.out.println("-" + c);
+	        s += ("-" + c + "\n");
 	    }
+	    return s;
 	}
 	
 	public String afficherPirate() { 
