@@ -80,7 +80,7 @@ public class Pirate {
 	    }
 	}
 	
-	void afficherPirate() { 
+	public void afficherPirate() { 
         System.out.println("Pirate " + this.numero_joueur + " | PV : " + this.pv + " | Prime : " + this.prime);
     }
 
