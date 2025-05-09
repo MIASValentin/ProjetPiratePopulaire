@@ -35,4 +35,8 @@ public class BoundaryJouerCarte {
     	controlJouerCarte.appliquerEffet(numJoueur, numCarte); 
     }
 	
+	public void piocherCarte(int numCarteAPiocher) {
+		controlJouerCarte.piocherCarte(numCarteAPiocher); 
+	}
+	
 }

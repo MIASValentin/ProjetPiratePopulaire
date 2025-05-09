@@ -48,11 +48,15 @@ public class Main {
 			// Validation de la carte 
 			boundaryJouerCarte.appliquerEffet(boundaryPartie.getTourJoueur(), numCarte); 
 			
-			// Subir les dégats 
+			// Subir les dégats 4
+			
 			if(boundaryPartie.getTourJoueur() == 1) boundaryPartie.subirDegat(1); else boundaryPartie.subirDegat(2); 
 			
 			// Afficher pirate
 			boundaryPartie.afficherPirate();
+			
+			// Piocher une nouvelle carte à la fin du tour
+			boundaryJouerCarte.piocherCarte(1);
 		}
 		
 		

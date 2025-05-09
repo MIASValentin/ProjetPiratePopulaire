@@ -10,7 +10,7 @@ public class ControlPartie {
     private Pirate joueur1;
     private Pirate joueur2;
 
-    private final int primeAAtteindre = 15;
+    private final int primeAAtteindre = 5;
 
     public ControlPartie(Partie partie) {
         this.partie = partie;

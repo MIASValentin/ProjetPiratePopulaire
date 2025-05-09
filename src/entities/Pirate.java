@@ -70,7 +70,10 @@ public class Pirate {
 	        if (piochee != null) {
 	            this.main.add(piochee);
 	        }
+	        deck.getCartes().remove(piochee); 
 	    }
+	    
+	    
 	}
 	
 	public String afficherMain() {
