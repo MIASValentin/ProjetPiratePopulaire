@@ -12,8 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import entities.Pirate;
-import entities.Pioche;
 import entities.Carte;
+import entities.Deck;
 import entities.TypeCarte;
 
 public class TestPirate {
@@ -75,9 +75,10 @@ public class TestPirate {
         assertEquals(newMain, pirate.getMain());
 
         // Deck
-        assertTrue(pirate.getDeck().isEmpty());
-        List<Carte> newDeck = new ArrayList<>();
-        newDeck.add(cartesPioche.get(0));
+        assertTrue(pirate.getDeck().getCartes().isEmpty());
+        //List<Carte> newDeck = new ArrayList<>();
+        Deck newDeck = new Deck();
+        newDeck.setCartes(new ArrayList<Carte>());
         pirate.setDeck(newDeck);
         assertEquals(newDeck, pirate.getDeck());
     }
@@ -92,12 +93,13 @@ public class TestPirate {
 
     @Test
     void testPiocherCarte() {
-        Pioche pioche = new Pioche(new ArrayList<>(cartesPioche));
+        Deck pioche = new Deck();
+        pioche.setCartes(new ArrayList<Carte>());
         pirate.getMain().clear();
-        pirate.piocherCarte(pioche, 1);
+        pirate.piocherCarte(1);
         assertEquals(1, pirate.getMain().size(), "Doit piocher une carte");
         // Piocher plus que disponible
-        pirate.piocherCarte(pioche, 5);
+        pirate.piocherCarte(5);
         assertEquals(cartesPioche.size(), pirate.getMain().size(), "Ne doit pas dépasser le nombre de cartes disponibles");
     }
 
