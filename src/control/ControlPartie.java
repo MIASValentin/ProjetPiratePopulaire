@@ -65,8 +65,9 @@ public class ControlPartie {
 		else return getPirateNumJoueur(1); 
 	}
 
-	public void afficherTourJoueur(int numJoueur) {
-		
+	public String afficherMain() {
+		Pirate p = getPirateDuTour(); 
+		return p.afficherMain(); 
 	}
 
 	public void jouerTourDeJeu() {

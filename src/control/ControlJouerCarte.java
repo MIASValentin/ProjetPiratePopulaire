@@ -20,7 +20,7 @@ public class ControlJouerCarte {
 	public void appliquerEffet(int numJoueur, int numCarte) {
 		Pirate origine = controlPartie.getPirateDuTour(); 
 		Pirate cible = controlPartie.getAutrePirate(); 	
-		EffetInstantane carteAJouer = (EffetInstantane) origine.getMain().get(numCarte); 
+		EffetInstantane carteAJouer = (EffetInstantane) origine.getMain().get(numCarte-1); 
 		
 		carteAJouer.getEffet().accept(origine, cible);
 	}

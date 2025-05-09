@@ -43,7 +43,7 @@ public class BoundaryPartie {
 	
 	  public void afficherTourJoueur(int numJoueur) {
 		  	int numeroTour = controlPartie.getNumeroTour(); 
-	        String titre = " TOUR " + numeroTour + " - " + String.valueOf(numJoueur) + " ";
+	        String titre = " TOUR " + numeroTour + " - " + "Joueur" + String.valueOf(numJoueur) + " ";
 	        int largeur = titre.length() + 4;
 
 	        String bordure = "╔" + "═".repeat(largeur) + "╗";
@@ -55,6 +55,7 @@ public class BoundaryPartie {
 	        System.out.println(milieu);
 	        System.out.println(bas);
 	        System.out.println();
+	        controlPartie.afficherMain(); 
 	    }
 
 
@@ -62,13 +63,7 @@ public class BoundaryPartie {
 		System.out.println("Aie !");
 	}
 	
-	public void jouerTourDeJeu() {
-		passerAuTourSuivant();
-		System.out.println("C'est au tour du Joueur " + String.valueOf(getTourJoueur()));
-		
-		// Choisir la carte
-		
-	}
+	
 	
 	public void afficherPirate() {
 		System.out.println(controlPartie.afficherPirate());
