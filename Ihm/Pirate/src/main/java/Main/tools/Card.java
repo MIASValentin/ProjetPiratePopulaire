@@ -79,6 +79,9 @@ public class Card extends javax.swing.JPanel {
             }
         });
         addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
             }
@@ -127,27 +130,28 @@ public class Card extends javax.swing.JPanel {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         if(inHand){
             posPrec = evt.getPoint();
-            posDepart = evt.getPoint();
+            posDepart = this.getLocationOnScreen();
             zoneHand.remove(this);
             frame.add(this);
             moving = true;
+            zoneHand.repaint();
         }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        Point location = getLocation();
         Point CentreCarte = new Point(getLocationOnScreen().x + getWidth()/2
                             ,getLocationOnScreen().y + getHeight()/2);
         Point basDroiteHand = new Point(zoneHand.getLocationOnScreen().x + zoneHand.getWidth()/2
                             ,zoneHand.getLocationOnScreen().y + zoneHand.getHeight()/2);
         
-        if (zoneHand.getLocationOnScreen().x<CentreCarte.x && CentreCarte.x<basDroiteHand.x &&
-                zoneHand.getLocationOnScreen().y<CentreCarte.y && CentreCarte.y<basDroiteHand.y){
+        if (!(zoneHand.getLocationOnScreen().x<CentreCarte.x && CentreCarte.x<basDroiteHand.x &&
+                zoneHand.getLocationOnScreen().y<CentreCarte.y && CentreCarte.y<basDroiteHand.y)){
             //toujours dans hand
             moving =false;
             System.out.println("Main.tools.Card.formMouseReleased()\n\n");
             frame.remove(this);
             zoneHand.add(this);
+            setLocation(posDepart);
         }else{ 
             if(inHand){
                 inHand=false;
@@ -155,7 +159,6 @@ public class Card extends javax.swing.JPanel {
                 System.out.println("LIBRE  / / / / /");
             }
         }
-        
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -164,6 +167,10 @@ public class Card extends javax.swing.JPanel {
             setLocation(getLocation().x+newPos.x, getLocation().y+newPos.y);
         }
     }//GEN-LAST:event_formMouseDragged
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        System.out.println("Main.tools.Card.formMouseEntered()");
+    }//GEN-LAST:event_formMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

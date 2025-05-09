@@ -4,6 +4,8 @@
  */
 package Main.tools;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author pauli
@@ -13,6 +15,9 @@ public class ZoneHand extends javax.swing.JPanel {
     /**
      * Creates new form ZoneHand
      */
+    private int nbCard = 0;
+    private ArrayList<Card> cartes = new ArrayList();
+    
     public ZoneHand() {
         initComponents();
     }
@@ -26,22 +31,58 @@ public class ZoneHand extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+
         setBackground(new java.awt.Color(255, 102, 102));
         setPreferredSize(new java.awt.Dimension(390, 150));
+
+        jButton1.setText("spawnCard");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(296, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 148, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void spawnCard(){
+
+        this.setLayout(null);
+        Card newCard = new Card();
+        int unitWidth = getWidth()/5;
+        newCard.setSize(unitWidth, 130);
+        newCard.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1), (getHeight()-newCard.getHeight())/2);
+        newCard.setVisible(true);
+        this.add(newCard);
+        this.setComponentZOrder(newCard, 0);
+        this.revalidate();
+        this.repaint();
+        cartes.add(newCard);
+        nbCard+=1;
+       
+    }
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        spawnCard();
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
