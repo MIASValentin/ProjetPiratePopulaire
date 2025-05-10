@@ -24,15 +24,15 @@ public class BoundaryJouerCarte {
 	            }
 	        } else {
 	            System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
-	            scanner.next(); // on ignore l'entrée non valide
+	            scanner.next();
 	        }
 	    }
 
 	    return choix;
 	}
 	
-	public void appliquerEffet(int numJoueur, int numCarte) {
-    	controlJouerCarte.appliquerEffet(numJoueur, numCarte); 
+	public void appliquerEffet(int numCarte) {
+    	controlJouerCarte.appliquerEffet(numCarte); 
     }
 	
 	public void piocherCarte(int numCarteAPiocher) {

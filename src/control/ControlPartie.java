@@ -10,7 +10,7 @@ public class ControlPartie {
     private Pirate joueur1;
     private Pirate joueur2;
 
-    private final int primeAAtteindre = 5;
+    private static final int PRIMEAATTEINDRE = 5;
 
     public ControlPartie(Partie partie) {
         this.partie = partie;
@@ -25,7 +25,7 @@ public class ControlPartie {
         int primeJoueur2 = joueur2.getPrime();
 
         boolean pirateMort = pvJoueur1 <= 0 || pvJoueur2 <= 0;
-        boolean primeAtteinte = primeJoueur1 >= primeAAtteindre || primeJoueur2 >= primeAAtteindre;
+        boolean primeAtteinte = primeJoueur1 >= PRIMEAATTEINDRE || primeJoueur2 >= PRIMEAATTEINDRE;
 
         return pirateMort || primeAtteinte;
     }
@@ -72,12 +72,11 @@ public class ControlPartie {
 
 	public void jouerTourDeJeu() {
 		// incrémenter le nombre de tour 
-		partie.setNbTour(primeAAtteindre);
+		partie.setNbTour(PRIMEAATTEINDRE);
 		
 	}
 
 	public void afficherZoneDeCarte() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -87,6 +86,28 @@ public class ControlPartie {
 	
 	public String afficherPirate() {
 		return getPirateDuTour().afficherPirate();
+	}
+
+	public int getGagnant() {
+		int gagnant;
+		boolean gagnant1 = joueur2.getPv() <= 0 || joueur1.getPrime() >= PRIMEAATTEINDRE;
+ 		boolean gagnant2 = joueur1.getPv() <= 0 || joueur2.getPrime() >= PRIMEAATTEINDRE;
+		if(gagnant2) {
+			gagnant = 2;
+		}
+		else {
+			gagnant = 1;
+		}
+		if(gagnant1 && gagnant2) {
+			gagnant = 3;
+		}
+		return gagnant;
+	}
+
+	public void melangerDeck() {
+		Pirate joueurCourant = getPirateDuTour();
+		joueurCourant.melangerDeck();
+		
 	}
 
 

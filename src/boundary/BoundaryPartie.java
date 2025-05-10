@@ -1,17 +1,14 @@
 package boundary;
 
-import control.ControlJouerCarte;
 import control.ControlPartie;
 import entities.Carte;
 import entities.Pirate;
 
 public class BoundaryPartie {
 	private ControlPartie controlPartie;
-	private ControlJouerCarte controlJouerCarte; 
 	
-	public BoundaryPartie(ControlPartie controlPartie, ControlJouerCarte controlJouerCarte) {
+	public BoundaryPartie(ControlPartie controlPartie) {
 		this.controlPartie = controlPartie;
-		this.controlJouerCarte = controlJouerCarte;
 	}
 
 
@@ -32,6 +29,10 @@ public class BoundaryPartie {
 		controlPartie.initPartie(); 
 		
 	}
+	
+	public Pirate getJoueurCourant() {
+		return controlPartie.getPirateDuTour();
+	}
 
 
 	public void afficherMain(int numJoueur) {
@@ -44,7 +45,7 @@ public class BoundaryPartie {
 	
 	  public void afficherTourJoueur(int numJoueur) {
 		  	int numeroTour = controlPartie.getNumeroTour(); 
-	        String titre = " TOUR " + numeroTour + " - " + "Joueur " + String.valueOf(numJoueur) + " ";
+	        String titre = " TOUR " + numeroTour + " - " + "Joueur " + numJoueur + " ";
 	        int largeur = titre.length() + 4;
 
 	        String bordure = "╔" + "═".repeat(largeur) + "╗";
@@ -62,7 +63,7 @@ public class BoundaryPartie {
 
 
 	public void subirDegat(int degat) {
-		System.out.println("Aie !");
+		System.out.println("Aie ! (-" + degat + ")");
 	}
 	
 	
@@ -72,4 +73,16 @@ public class BoundaryPartie {
 		System.out.println();
 	}
 	
+	public void afficherGagnant() {
+		int gagnant = controlPartie.getGagnant();
+		if(gagnant == 3) {
+			System.out.println("Il y a eu égalité...");
+		}
+		else {
+			System.out.println("Le gagnant est : le joueur " + gagnant + "!");
+		}
+	}
+	public void melangerDeck() {
+		controlPartie.melangerDeck();
+	}
 }

@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
@@ -9,7 +10,9 @@ import java.util.Random;
 
 public class Deck {
 	
-	private List<Carte> cartes; 
+	private List<Carte> cartes;
+	private Random rd = new Random(); 
+
 	
 	public Deck() {
 		this.cartes = creerCartes(); 
@@ -35,21 +38,16 @@ public class Deck {
 	    }
 	}
 	
-	public List<ArrayList<Carte>> creerBundle() {
-    	int nb_carte_bundle = 3;
-    	int nb_bundle = 3;
-    	
-    	Random rd = new Random(); 
+	public List<ArrayList<Carte>> creerBundle(int nbCartesBundle, int nbBundle) {
     	List<Carte> nouvellesCartes = creerCartes();
     	List<Carte> cartesBundle = Stream.generate(()->nouvellesCartes.
     			get(rd.nextInt(nouvellesCartes.size()-1)))
-    			.limit(nb_carte_bundle*nb_bundle).toList();
+    			.limit(nbCartesBundle*nbBundle).toList();
     	
-    	List<ArrayList<Carte>> rslt = new ArrayList<ArrayList<Carte>>();
-    	rslt = Stream.of(new ArrayList<Carte>(), new ArrayList<Carte>(), new ArrayList<Carte>()).toList();
+    	List<ArrayList<Carte>> rslt = Stream.of(new ArrayList<Carte>(), new ArrayList<Carte>(), new ArrayList<Carte>()).toList();
     	
-    	for (int i=0; i<nb_carte_bundle*nb_bundle; i++) {
-    		rslt.get(i/nb_bundle).add(cartesBundle.get(i));
+    	for (int i=0; i<nbCartesBundle*nbBundle; i++) {
+    		rslt.get(i/nbBundle).add(cartesBundle.get(i));
     	}
     	
     	return rslt;
@@ -57,7 +55,7 @@ public class Deck {
 	
 	public Carte donnerCarte() {
 	    if (cartes.isEmpty()) {
-	        return null; // ou lève une exception selon ton design
+	        return null;
 	    }
 	    Carte carteAleatoire = cartes.get(ThreadLocalRandom.current().nextInt(cartes.size()));
 	    cartes.remove(carteAleatoire); 
@@ -163,7 +161,7 @@ public class Deck {
         );
 
       
-        Carte tempêteEnMer = new EffetInstantane(
+        Carte tempeteEnMer = new EffetInstantane(
             TypeCarte.ATTAQUE,
             "Tempête en Mer",
             "Tous les pirates perdent 1 point de vie.",
@@ -195,10 +193,14 @@ public class Deck {
             tirDeCanon,
             chantDesSirenes,
             abordage,
-            tempêteEnMer,
+            tempeteEnMer,
             criDeLaKraken
         ));
     }
+
+	public void melangerCartes() {
+		Collections.shuffle(cartes);
+	}
 
 	
 }

@@ -2,23 +2,22 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
-	int numero_joueur;
+	int numeroJoueur;
 	Carte bateau; 
 	List<Carte> main = new ArrayList<>();
 	Deck deck = new Deck(); 
  
 	
 	
-	public Pirate(int pv, int prime, int numero_joueur) {
+	public Pirate(int pv, int prime, int numeroJoueur) {
 		super();
 		this.pv = pv;
 		this.prime = prime;
-		this.numero_joueur = numero_joueur;
+		this.numeroJoueur = numeroJoueur;
 	}
 	public int getPv() {
 		return pv;
@@ -33,7 +32,7 @@ public class Pirate {
 		this.prime = prime;
 	}
 	public int getNum() {
-		return numero_joueur;
+		return numeroJoueur;
 	}
 	public Carte getBateau() {
 		return bateau;
@@ -77,7 +76,7 @@ public class Pirate {
 	}
 	
 	public String afficherMain() {
-	    String s = ("Main du pirate " + this.numero_joueur + "\n");
+	    String s = ("Main du pirate " + this.numeroJoueur + "\n");
 	    for (Carte c : main) {
 	        s += ("-" + c + "\n");
 	    }
@@ -85,8 +84,11 @@ public class Pirate {
 	}
 	
 	public String afficherPirate() { 
-        return ("Pirate " + this.numero_joueur + " | PV : " + this.pv + " | Prime : " + this.prime);
+        return ("Pirate " + this.numeroJoueur + " | PV : " + this.pv + " | Prime : " + this.prime);
     }
+	public void melangerDeck() {
+		deck.melangerCartes();
+	}
 
 	
 //	public void jouerCarte(Carte carte);
