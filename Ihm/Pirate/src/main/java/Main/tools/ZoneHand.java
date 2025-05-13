@@ -4,7 +4,10 @@
  */
 package Main.tools;
 
+import Main.Pirate;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,12 +19,13 @@ public class ZoneHand extends javax.swing.JPanel {
      * Creates new form ZoneHand
      */
     private int nbCard = 0;
-    private ArrayList<Card> cartes = new ArrayList();
+    private Pirate mainFrame;
     
-    public ZoneHand() {
+    public ZoneHand(Pirate mainFrame) {
         initComponents();
+        this.mainFrame = mainFrame;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,17 +67,14 @@ public class ZoneHand extends javax.swing.JPanel {
 
     public void spawnCard(){
 
-        this.setLayout(null);
-        Card newCard = new Card();
+        Carte newCarte = new Carte();
+        mainFrame.add(newCarte);
+        newCarte.setSize(80, 120);
+        newCarte.setLocation(50, 50);
         int unitWidth = getWidth()/5;
-        newCard.setSize(unitWidth, 130);
-        newCard.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1), (getHeight()-newCard.getHeight())/2);
-        newCard.setVisible(true);
-        this.add(newCard);
-        this.setComponentZOrder(newCard, 0);
-        this.revalidate();
-        this.repaint();
-        cartes.add(newCard);
+        newCarte.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1)+getLocationOnScreen().x,
+                (getHeight()-newCarte.getHeight())/2+getLocationOnScreen().y);
+        mainFrame.addCarte(newCarte);
         nbCard+=1;
        
     }

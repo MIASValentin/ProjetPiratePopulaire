@@ -4,8 +4,7 @@
  */
 package Main.tools;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import Main.Pirate;
 
 /**
  *
@@ -13,19 +12,16 @@ import javax.swing.SwingUtilities;
  */
 public class ZoneJeu extends javax.swing.JPanel {
 
-    JFrame frame;
+    Pirate mainFrame;
     /**
      * Creates new form ZoneJeu
      */
-    public ZoneJeu() {
+    public ZoneJeu(Pirate mainFrame) {
         initComponents();
+        this.mainFrame = mainFrame;
     }
 
-    @Override
-    public void addNotify() {
-        super.addNotify(); 
-        frame= (JFrame) SwingUtilities.getWindowAncestor(this);
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +35,7 @@ public class ZoneJeu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(242, 242, 0));
 
-        jButton1.setText("nouvelle Partie");
+        jButton1.setText("fin Partie");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -51,7 +47,7 @@ public class ZoneJeu extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(640, Short.MAX_VALUE)
+                .addContainerGap(671, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -64,8 +60,12 @@ public class ZoneJeu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void finPartie(){
+        mainFrame.getCartes();
+    }
+    
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
+        finPartie();
     }//GEN-LAST:event_jButton1MouseClicked
 
 
