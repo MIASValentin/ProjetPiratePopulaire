@@ -5,6 +5,8 @@
 package Main.tools;
 
 import Main.Pirate;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -61,7 +63,19 @@ public class ZoneJeu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void finPartie(){
-        mainFrame.getCartes();
+        ArrayList<Carte> cartes = mainFrame.getCartes();
+        Point posBasDroite = new Point(getLocation().x+getWidth(),
+                                    getLocation().y+getHeight());
+        for (int i =0; i<cartes.size(); i++){
+            Point cLoc = cartes.get(i).getLocation();
+            if(getLocation().x < cLoc.x && cLoc.x < posBasDroite.x &&
+                    getLocation().y < cLoc.y && cLoc.y < posBasDroite.y){
+                System.out.println("Jouer Carte: "+ cartes.get(i).getName());
+            }
+            cartes.get(i).setVisible(false);
+            mainFrame.remove(cartes.get(i));
+        }
+        System.out.println("penser a supprimer les cartes !!!!!!");
     }
     
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
