@@ -5,6 +5,7 @@
 package Main.tools;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -28,6 +29,7 @@ public class Card extends javax.swing.JPanel {
     private boolean moving = false;
     private Point posPrec;
     private Point posDepart;
+    private Dimension size;
     private Container zoneHand;
     private JFrame frame;
     
@@ -39,7 +41,6 @@ public class Card extends javax.swing.JPanel {
         CardDescription.setText("<html>"+descCarte+"</html>");
         CardAttaque.setText(attCarte);
         CardPopularite.setText(popCarte);
-        //getParent().setComponentZOrder(this, 0);
     }
 
     @Override
@@ -129,10 +130,13 @@ public class Card extends javax.swing.JPanel {
     //co limite zoneHand, co centre carte
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         if(inHand){
+            size = getSize();
             posPrec = evt.getPoint();
             posDepart = this.getLocationOnScreen();
             zoneHand.remove(this);
             frame.add(this);
+            frame.setComponentZOrder(this, 0);
+            this.setSize(size);
             moving = true;
             zoneHand.repaint();
         }
@@ -151,6 +155,8 @@ public class Card extends javax.swing.JPanel {
             System.out.println("Main.tools.Card.formMouseReleased()\n\n");
             frame.remove(this);
             zoneHand.add(this);
+            zoneHand.setComponentZOrder(this, 0);
+            this.setSize(size);
             setLocation(posDepart);
         }else{ 
             if(inHand){
