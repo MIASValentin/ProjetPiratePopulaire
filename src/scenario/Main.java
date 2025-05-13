@@ -53,6 +53,9 @@ public class Main {
 			
 			//Choisir bundles
 			boundaryChoisirBundle.selectionnerBundle(lBundles, joueurCourant);
+			
+			//Mélanger les cartes
+			boundaryPartie.melangerDeck();
 			// Affichage main Joueur courant 
 			boundaryPartie.afficherMain(boundaryPartie.getTourJoueur()); 
 			
