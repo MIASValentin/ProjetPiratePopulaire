@@ -18,6 +18,10 @@ public class Carte extends javax.swing.JPanel {
      */
     public Carte() {
         initComponents();
+        nomCarte.setBounds(10, 10, 100, 30);
+        descriptionCarte.setBounds(10, 30, 100, 30);
+        effetCarte.setBounds(10, 50, 100, 30);
+
     }
 
     /**
