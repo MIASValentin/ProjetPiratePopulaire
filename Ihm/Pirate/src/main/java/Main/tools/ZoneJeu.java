@@ -78,7 +78,7 @@ public class ZoneJeu extends javax.swing.JPanel {
             mainFrame.remove(cartes.get(i));
         }
         
-        System.out.println("penser a supprimer les cartes !!!!!!");
+        mainFrame.resetHand();
     }
     
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

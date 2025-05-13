@@ -57,6 +57,11 @@ public class Pirate extends javax.swing.JFrame {
         cartes.add(carte);
     }
     
+    public void resetHand(){
+        cartes = new ArrayList();
+        zoneHand1.reset();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

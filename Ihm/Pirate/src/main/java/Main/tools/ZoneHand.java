@@ -64,8 +64,12 @@ public class ZoneHand extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void reset(){
+        nbCard = 0;
+    }
+    
     public void spawnCard(){
-
         Carte newCarte = new Carte();
         mainFrame.add(newCarte);
         newCarte.setSize(80, 120);
@@ -75,7 +79,6 @@ public class ZoneHand extends javax.swing.JPanel {
                 (getHeight()-newCarte.getHeight())/2+getLocationOnScreen().y);
         mainFrame.addCarte(newCarte);
         nbCard+=1;
-       
     }
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         spawnCard();
