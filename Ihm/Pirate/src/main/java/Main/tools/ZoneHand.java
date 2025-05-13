@@ -5,9 +5,6 @@
 package Main.tools;
 
 import Main.Pirate;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -21,11 +18,13 @@ public class ZoneHand extends javax.swing.JPanel {
     private int nbCard = 0;
     private Pirate mainFrame;
     
-    public ZoneHand(Pirate mainFrame) {
+    public ZoneHand() {
         initComponents();
-        this.mainFrame = mainFrame;
     }
     
+    public void setMainFrame(Pirate mainFrame) {
+        this.mainFrame = mainFrame;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,8 +80,6 @@ public class ZoneHand extends javax.swing.JPanel {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         spawnCard();
     }//GEN-LAST:event_jButton1MouseClicked
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables

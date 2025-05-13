@@ -18,11 +18,13 @@ public class ZoneJeu extends javax.swing.JPanel {
     /**
      * Creates new form ZoneJeu
      */
-    public ZoneJeu(Pirate mainFrame) {
+    public ZoneJeu() {
         initComponents();
+    }
+    
+    public void setMainFrame(Pirate mainFrame) {
         this.mainFrame = mainFrame;
     }
-
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +77,7 @@ public class ZoneJeu extends javax.swing.JPanel {
             cartes.get(i).setVisible(false);
             mainFrame.remove(cartes.get(i));
         }
+        
         System.out.println("penser a supprimer les cartes !!!!!!");
     }
     

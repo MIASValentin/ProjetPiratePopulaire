@@ -29,6 +29,10 @@ public class Carte extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        nomCarte = new javax.swing.JLabel();
+        descriptionCarte = new javax.swing.JLabel();
+        effetCarte = new javax.swing.JLabel();
+
         setBackground(new java.awt.Color(102, 255, 102));
         setMaximumSize(new java.awt.Dimension(80, 120));
         setMinimumSize(new java.awt.Dimension(80, 120));
@@ -46,15 +50,34 @@ public class Carte extends javax.swing.JPanel {
             }
         });
 
+        nomCarte.setText("NomCarte");
+
+        descriptionCarte.setText("Description");
+
+        effetCarte.setText("effetCarte");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(effetCarte)
+                    .addComponent(descriptionCarte)
+                    .addComponent(nomCarte))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(nomCarte)
+                .addGap(50, 50, 50)
+                .addComponent(descriptionCarte)
+                .addGap(55, 55, 55)
+                .addComponent(effetCarte)
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -76,5 +99,8 @@ public class Carte extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel descriptionCarte;
+    private javax.swing.JLabel effetCarte;
+    private javax.swing.JLabel nomCarte;
     // End of variables declaration//GEN-END:variables
 }
