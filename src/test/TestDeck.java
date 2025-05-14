@@ -40,7 +40,7 @@ public class TestDeck {
     @Test
     void testCreerBundleDefaultDeck() {
         Deck deck = new Deck();
-        List<ArrayList<Carte>> bundles = deck.creerBundle();
+        List<ArrayList<Carte>> bundles = deck.creerBundle(3,3);
         assertEquals(3, bundles.size(), "Il doit y avoir 3 bundles");
         for (List<Carte> bundle : bundles) {
             assertEquals(3, bundle.size(), "Chaque bundle doit contenir 3 cartes");
