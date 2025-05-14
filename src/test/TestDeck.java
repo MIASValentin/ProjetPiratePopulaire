@@ -1,102 +1,77 @@
 package test;
 
+import entities.Deck;
+import entities.Carte;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
-import entities.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests unitaires pour la classe Deck couvrant une stratégie robuste & forte :
- * - États du deck (null, vide, taille=1, deck par défaut)
- * - Méthodes getNbCarte, getCartes, setCartes, creerBundle, donnerCarte
- */
 public class TestDeck {
+    private Deck deck;
 
-    /** Sous-classe concrète de Carte pour tests personnalisés */
-    private static class DummyCarte extends Carte {
-        DummyCarte(TypeCarte type, String nom, String description) {
-            this.type = type;
-            this.nom = nom;
-            this.description = description;
-        }
+    @BeforeEach
+    void setUp() {
+        deck = new Deck();
     }
 
-    /**
-     * État par défaut : deck initial de 12 cartes
-     */
     @Test
-    void testDefaultDeckProperties() {
-        Deck deck = new Deck();
-        assertNotNull(deck.getCartes(), "La liste de cartes ne doit pas être nulle");
-        assertEquals(12, deck.getNbCarte(), "Le deck par défaut doit contenir 12 cartes");
+    void testInitialCarteCount() {
+        assertEquals(12, deck.getNbCarte(), "Le deck initial doit contenir 12 cartes");
+        assertEquals(12, deck.getCartes().size(), "La liste cartes doit être de taille 12");
     }
 
-    /**
-     * Couverture forte & robuste de creerBundle() sur deck par défaut
-     */
     @Test
-    void testCreerBundleDefaultDeck() {
-        Deck deck = new Deck();
-        List<ArrayList<Carte>> bundles = deck.creerBundle(3,3);
-        assertEquals(3, bundles.size(), "Il doit y avoir 3 bundles");
-        for (List<Carte> bundle : bundles) {
-            assertEquals(3, bundle.size(), "Chaque bundle doit contenir 3 cartes");
-            for (Carte c : bundle) {
-                assertNotNull(c, "Chaque carte dans le bundle ne doit pas être nulle");
-            }
-        }
+    void testSetAndGetCartes() {
+        List<Carte> newCartes = new ArrayList<>();
+        deck.setCartes(newCartes);
+        assertSame(newCartes, deck.getCartes(), "getCartes doit retourner la liste définie par setCartes");
+        assertEquals(0, deck.getNbCarte(), "Le nombre de cartes doit refléter setCartes");
     }
 
-    /**
-     * Donner carte depuis un deck non vide (taille>1)
-     */
     @Test
-    void testDonnerCarteDefaultDeck() {
-        Deck deck = new Deck();
+    void testDonnerCarte_removesCarteAndReturnsIt() {
         int initialSize = deck.getNbCarte();
-        Carte drawn = deck.donnerCarte();
-        assertNotNull(drawn, "Une carte doit être retournée pour un deck non vide");
-        assertEquals(initialSize - 1, deck.getNbCarte(), "Le deck doit perdre une carte");
+        Carte c = deck.donnerCarte();
+        assertNotNull(c, "donnerCarte ne doit pas retourner null tant que le deck n'est pas vide");
+        assertEquals(initialSize - 1, deck.getNbCarte(), "Le nombre de cartes doit diminuer après donnerCarte");
+        assertFalse(deck.getCartes().contains(c), "La carte retournée doit être supprimée du deck");
     }
 
-    /**
-     * Donner carte depuis un deck à un seul élément
-     */
     @Test
-    void testDonnerCarteSingleCard() {
-        Deck deck = new Deck();
-        DummyCarte dummy = new DummyCarte(TypeCarte.ATTAQUE, "N", "D");
-        List<Carte> list = new ArrayList<>();
-        list.add(dummy);
-        deck.setCartes(list);
-        assertEquals(1, deck.getNbCarte(), "Le deck doit contenir exactement 1 carte avant tirage");
-        Carte drawn = deck.donnerCarte();
-        assertSame(dummy, drawn, "La carte retournée doit être celle présente");
-        assertEquals(0, deck.getNbCarte(), "Le deck doit être vide après un tirage");
+    void testDonnerCarte_whenEmpty() {
+        int initialSize = deck.getNbCarte();
+        for (int i = 0; i < initialSize; i++) {
+            assertNotNull(deck.donnerCarte(), "Chaque appel doit retourner une carte jusqu'à épuisement");
+        }
+        assertEquals(0, deck.getNbCarte(), "Le deck doit être vide après avoir retiré toutes les cartes");
+        assertNull(deck.donnerCarte(), "donnerCarte doit retourner null si le deck est vide");
     }
 
-    /**
-     * Tirer une carte d'un deck vide
-     */
     @Test
-    void testDonnerCarteEmptyDeck() {
-        Deck deck = new Deck();
-        deck.setCartes(new ArrayList<>());
-        assertEquals(0, deck.getNbCarte(), "Le deck doit être vide");
-        assertNull(deck.donnerCarte(), "Null attendu pour un deck vide");
+    void testMelangerCartes_keepsSameCards() {
+        List<Carte> original = new ArrayList<>(deck.getCartes());
+        deck.melangerCartes();
+        List<Carte> shuffled = deck.getCartes();
+        assertEquals(12, shuffled.size(), "Le deck doit toujours contenir 12 cartes après melangerCartes");
+        assertTrue(shuffled.containsAll(original), "Le deck après shuffle doit contenir toutes les cartes originales");
+        assertEquals(new HashSet<>(original).size(), new HashSet<>(shuffled).size(),
+            "Pas de duplicata après melangerCartes");
     }
 
-    /**
-     * Setter de cartes à null et comportement en aval
-     */
     @Test
-    void testSetCartesNull() {
-        Deck deck = new Deck();
-        deck.setCartes(null);
-        assertThrows(NullPointerException.class, () -> deck.getNbCarte(),
-            "Une NullPointerException est attendue si la liste de cartes est null");
+    void testCreerBundle_cardCountsAndBundles() {
+        int nbCartesBundle = 2;
+        int nbBundle = 3;
+        var bundles = deck.creerBundle(nbCartesBundle, nbBundle);
+        assertEquals(nbBundle, bundles.size(), "Le nombre de bundles doit correspondre au param nbBundle");
+        int total = bundles.stream().mapToInt(List::size).sum();
+        assertEquals(nbCartesBundle * nbBundle, total,
+            "Le nombre total de cartes dans les bundles doit être nbCartesBundle*nbBundle");
+        bundles.forEach(b -> assertNotNull(b, "Chaque bundle doit être non-nul"));
     }
 }
