@@ -28,9 +28,4 @@ public class EffetInstantane extends Carte{
     	return super.nom + " : " + super.description; 
     }
 
-
-	
-
-    
-
 }
