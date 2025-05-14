@@ -4,7 +4,6 @@ public class Partie {
 	//Pirate dans la partie
 	private Pirate joueur1, joueur2;
 	private int nbTour = 0 ;
-	private ZoneCarte zoneCarte; 
 	
 	public int getNbTour() {
 		return nbTour;
@@ -14,14 +13,9 @@ public class Partie {
 		this.nbTour = nbTour; 
 	}
 	
-	public ZoneCarte getZoneCarte() {
-		return this.zoneCarte; 
-	}
-	
-	public Partie (Pirate joueur1, Pirate joueur2, ZoneCarte zoneCarte) {
+	public Partie (Pirate joueur1, Pirate joueur2) {
 		this.joueur1 = joueur1; 
 		this.joueur2 = joueur2; 
-		this.zoneCarte = zoneCarte; 
 	}
 	
 	

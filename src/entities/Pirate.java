@@ -7,7 +7,6 @@ public class Pirate {
 	int pv = 10; 
 	int prime = 0; 
 	int numeroJoueur;
-	Carte bateau; 
 	List<Carte> main = new ArrayList<>();
 	Deck deck = new Deck(); 
  
@@ -33,12 +32,6 @@ public class Pirate {
 	}
 	public int getNum() {
 		return numeroJoueur;
-	}
-	public Carte getBateau() {
-		return bateau;
-	}
-	public void setBateau(Carte bateau) {
-		this.bateau = bateau;
 	}
 	public List<Carte> getMain() {
 		return main;
