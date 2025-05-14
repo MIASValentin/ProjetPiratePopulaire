@@ -76,9 +76,6 @@ public class ControlPartie {
 		
 	}
 
-	public void afficherZoneDeCarte() {
-		
-	}
 
 	public int getNumeroTour() {
 		return partie.getNbTour(); 
@@ -109,6 +106,4 @@ public class ControlPartie {
 		joueurCourant.melangerDeck();
 		
 	}
-
-
 }
