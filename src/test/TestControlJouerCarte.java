@@ -1,79 +1,98 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import control.ControlJouerCarte;
 import control.ControlPartie;
 import entities.EffetInstantane;
-import entities.Partie;
 import entities.Pirate;
+import entities.Deck;
 import entities.TypeCarte;
-import entities.ZoneCarte;
+import entities.Carte;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TestControlJouerCarte {
-	private Pirate pirate1;
-    private Pirate pirate2;
-    private Partie partie;
-    private ControlPartie controlPartie;
-    private ControlJouerCarte controlJouerCarte;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ControlJouerCarteTest {
+
+    /**
+     * Stub minimal de ControlPartie pour piloter
+     * getPirateDuTour() et getAutrePirate() sans mock.
+     */
+    private static class FakePartie extends ControlPartie {
+        private Pirate tour, autre;
+
+        public void setTour(Pirate p) { this.tour = p; }
+        public void setAutre(Pirate p) { this.autre = p; }
+
+        @Override
+        public Pirate getPirateDuTour() { return tour; }
+
+        @Override
+        public Pirate getAutrePirate() { return autre; }
+    }
+
+    private FakePartie partie;
+    private ControlJouerCarte controller;
 
     @BeforeEach
     void setUp() {
-        // Initialiser deux pirates
-        pirate1 = new Pirate(10, 0, 1);
-        pirate2 = new Pirate(10, 0, 2);
-
-        // Creer une zone de cartes vide
-        ZoneCarte zoneCarte = new ZoneCarte();
-
-        // Creer une Partie avec les deux pirates et la zone
-        partie = new Partie(pirate1, pirate2, zoneCarte);
-        partie.setNbTour(1); // tour impair -> c'est pirate1 qui joue
-
-        // Creer les controleurs
-        controlPartie = new ControlPartie(partie);
-        controlJouerCarte = new ControlJouerCarte(controlPartie);
+        partie    = new FakePartie();
+        controller = new ControlJouerCarte(partie);  // classe sous test :contentReference[oaicite:1]{index=1}
     }
 
     @Test
-    void testAppliquerEffet() {
-        // Creer une carte qui enleve 2 PV a l'adversaire
-        EffetInstantane attaque = new EffetInstantane(
+    void appliquerEffet_doitModifierLesPiratesEtRetirerLaCarte() {
+        // 1) Préparer deux pirates et injecter dans la partie
+        Pirate origine = new Pirate(10, 0, 1);
+        Pirate cible   = new Pirate(5,  1, 2);
+        partie.setTour(origine);
+        partie.setAutre(cible);
+
+        // 2) Créer une carte à effet instantané : +2 PV à l'origine, +3 prime à la cible
+        EffetInstantane carte = new EffetInstantane(
             TypeCarte.ATTAQUE,
-            "Coup rapide",
-            "Inflige 2 degats a l'adversaire.",
-            (j1, j2) -> j2.changerPv(-2)
+            "Test",
+            "Description",
+            (o, c) -> {
+                o.changerPv(2);
+                c.changerPrime(3);
+            }
         );
 
-        // Ajouter la carte a la main du pirate1
-        pirate1.getMain().add(attaque);
+        // 3) Mettre cette carte en main de l'origine
+        List<Carte> main = new ArrayList<>();
+        main.add(carte);
+        origine.setMain(main);
 
-        // Verifier les PV de l'adversaire avant l'effet
-        assertEquals(10, pirate2.getPv());
+        // 4) Appeler la méthode sous test
+        controller.appliquerEffet(1);
 
-        // Jouer la carte
-        controlJouerCarte.appliquerEffet(1);
-
-        // Verifier que l'effet a ete applique et que la carte a ete retiree de la main
-        assertEquals(8, pirate2.getPv(), "Le pirate 2 devrait perdre 2 PV.");
-        assertFalse(pirate1.getMain().contains(attaque), "La carte jouee doit etre retiree de la main.");
+        // 5) Vérifier les effets et la suppression de la carte
+        assertEquals(12, origine.getPv(),   "Origine doit gagner 2 PV");
+        assertEquals(4,  cible.getPrime(),  "Cible doit gagner 3 de prime");
+        assertTrue(origine.getMain().isEmpty(), "La carte doit être retirée de la main");
     }
 
     @Test
-    void testPiocherCarte() {
-        // Nombre de cartes avant la pioche
-        int cartesAvant = pirate1.getMain().size();
+    void piocherCarte_doitAjouterLeNombreCorrectDeCartes() {
+        // 1) Pirate du tour avec un deck vide
+        Pirate pirate = new Pirate(10, 0, 1);
+        Deck deckVide = new Deck();
+        pirate.setDeck(deckVide);
+        partie.setTour(pirate);
 
-        // Piocher une carte
-        controlJouerCarte.piocherCarte(1);
+        // 2) Taille avant pioche
+        int tailleAvant = pirate.getDeck().getCartes().size();
 
-        // Nombre de cartes apres la pioche
-        int cartesApres = pirate1.getMain().size();
+        // 3) Appel sous test
+        controller.piocherCarte(3);
 
-        assertEquals(cartesAvant + 1, cartesApres, "Le pirate devrait avoir 1 carte de plus apres la pioche.");
+        // 4) Vérifier que 3 cartes ont été ajoutées
+        int tailleApres = pirate.getDeck().getCartes().size();
+        assertEquals(tailleAvant + 3, tailleApres,
+            "Après piocherCarte(3), le deck doit contenir 3 cartes supplémentaires");
     }
 }
