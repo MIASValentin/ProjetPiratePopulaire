@@ -10,13 +10,13 @@ import java.awt.Point;
  *
  * @author pauli
  */
-public class Carte extends javax.swing.JPanel {
+public class ZoneCarte extends javax.swing.JPanel {
     private boolean moving = false;
     private Point posPrec;
     /**
      * Creates new form Carte
      */
-    public Carte() {
+    public ZoneCarte() {
         initComponents();
         nomCarte.setBounds(10, 10, 100, 30);
         descriptionCarte.setBounds(10, 30, 100, 30);
@@ -38,8 +38,9 @@ public class Carte extends javax.swing.JPanel {
         effetCarte = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 255, 102));
-        setMaximumSize(new java.awt.Dimension(80, 120));
-        setMinimumSize(new java.awt.Dimension(80, 120));
+        setMaximumSize(new java.awt.Dimension(120, 120));
+        setMinimumSize(new java.awt.Dimension(120, 120));
+        setPreferredSize(new java.awt.Dimension(120, 120));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -70,7 +71,7 @@ public class Carte extends javax.swing.JPanel {
                     .addComponent(effetCarte)
                     .addComponent(descriptionCarte)
                     .addComponent(nomCarte))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +82,7 @@ public class Carte extends javax.swing.JPanel {
                 .addComponent(descriptionCarte)
                 .addGap(55, 55, 55)
                 .addComponent(effetCarte)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

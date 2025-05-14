@@ -34,33 +34,18 @@ public class ZoneHand extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-
         setBackground(new java.awt.Color(255, 102, 102));
         setPreferredSize(new java.awt.Dimension(390, 150));
-
-        jButton1.setText("spawnCard");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(296, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+            .addGap(0, 390, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(121, Short.MAX_VALUE))
+            .addGap(0, 150, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -70,20 +55,15 @@ public class ZoneHand extends javax.swing.JPanel {
     }
     
     public void spawnCard(){
-        Carte newCarte = new Carte();
+        ZoneCarte newCarte = new ZoneCarte();
         mainFrame.add(newCarte);
-        newCarte.setSize(80, 120);
-        newCarte.setLocation(50, 50);
+        newCarte.setSize(120, 120);
         int unitWidth = getWidth()/5;
-        newCarte.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1)+getLocationOnScreen().x,
-                (getHeight()-newCarte.getHeight())/2+getLocationOnScreen().y);
+        newCarte.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1)+getLocation().x,
+                (getHeight()-(newCarte.getHeight()/2))/2+getLocation().y);
         mainFrame.addCarte(newCarte);
         nbCard+=1;
     }
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        spawnCard();
-    }//GEN-LAST:event_jButton1MouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

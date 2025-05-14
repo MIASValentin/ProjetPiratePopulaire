@@ -20,31 +20,38 @@ import javax.imageio.ImageIO;
  */
 public final class ZoneImageProfil extends javax.swing.JPanel {
 
+    public boolean player1 = true;
     private Image photoProfil;
+    
+    private String pathPirate1 ="\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg";
+    private String pathPirate2 ="\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg";
     
     public ZoneImageProfil() {
         initComponents();
-        String localPirateAdresse = (System.getProperty("user.dir"));
-        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
-        ajouterImage(path);
+        ajouterImage();
     }
-/**
-     * Creates new form ZoneImageProfil
-     * @param fichierImage
-     */
-       protected void ajouterImage(File fichierImage)
-{
+    
+    public void ChangePlayer(){
+        player1 = !player1;
+    }
+    
+    private void ajouterImage(){
+        String localPirateAdresse = (System.getProperty("user.dir"));
+        File path;
+        if (player1){
+            path = new File(localPirateAdresse + pathPirate1);
+        } else{
+            path = new File(localPirateAdresse + pathPirate2);
+        }
+           
         try {
             // lire l'image
-            photoProfil = ImageIO.read(fichierImage);
+            photoProfil = ImageIO.read(path);
         } catch (IOException ex) {
             Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    // Appel à repaint pour activer l'affichage du panneau et visualisation
-    // de l'image sur la surface du panneau. 
-    repaint(); 
-}
+        repaint(); 
+    }   
 
     
     @Override
