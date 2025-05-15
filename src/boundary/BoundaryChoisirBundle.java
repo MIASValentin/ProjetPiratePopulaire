@@ -20,6 +20,7 @@ public class BoundaryChoisirBundle {
 		int choix = scanner.nextInt();
 		while(choix < 1 || choix > ControlChoisirBundle.NB_BUNDLES) {
 			System.out.println("Entrée invalide, veuillez choisir un bundle (1-" + ControlChoisirBundle.NB_BUNDLES + ")");
+			choix = scanner.nextInt();
 		}
 		System.out.println("vous avez choisi le bundle "+ choix +
 				", nous allons maintenant l'ajouter a votre deck !");

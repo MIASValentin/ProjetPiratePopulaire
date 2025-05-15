@@ -84,7 +84,7 @@ public class Main {
 			System.out.println("Bienvenue dans le jeu Pirate:\n-1: lancer partie\n-2: quitter");
 			choix = scanner.nextInt();
 			if (choix < 1 || choix > 2) {
-                System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 4.");
+                System.out.println("Entrée invalide. Veuillez entrer 1 ou 2.");
             }
 			if(choix == 1) {
 				lancerPartie();
