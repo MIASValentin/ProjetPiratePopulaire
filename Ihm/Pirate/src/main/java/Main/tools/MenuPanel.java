@@ -117,7 +117,7 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Pirate frame = new Pirate();
-        frame.setVisible(true);
+        frame.main(null);
         this.setVisible(false);
         menu.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
