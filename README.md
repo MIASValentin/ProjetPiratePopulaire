@@ -52,3 +52,6 @@ Fichier spécification du jeu dans la branche main, dans le dossier Organisation
 - avancée sur l'ECB
 - mise en commun des avancements sur l'IHM
 - mise en commun des avancements sur les tests
+
+21/05 : TP non-encadré
+- finalisation du noyau fonctionnel
