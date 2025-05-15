@@ -22,9 +22,8 @@ public class Main {
 		joueur1.setDeck(deckJoueur1);
 		joueur2.setDeck(deckJoueur2);
 		
-		ZoneCarte zoneCarte = new ZoneCarte(); 
 		
-		Partie partie = new Partie(joueur1, joueur2, zoneCarte);
+		Partie partie = new Partie(joueur1, joueur2);
 		
 		ControlPartie controlPartie = new ControlPartie(partie); 
 		ControlJouerCarte controlJouerCarte = new ControlJouerCarte(controlPartie); 
