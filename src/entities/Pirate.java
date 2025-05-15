@@ -51,7 +51,7 @@ public class Pirate {
 		this.pv = this.pv + newValue; 
 	}
 	
-	public void changerPime(int newValue) {
+	public void changerPrime(int newValue) {
 		this.prime = this.prime + newValue; 
 	}
 	

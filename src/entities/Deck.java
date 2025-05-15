@@ -65,21 +65,21 @@ public class Deck {
 	public List<Carte> creerCartes() {
 
         Carte discoursInspirant = new EffetInstantane(
-            TypeCarte.ATTAQUE,
+            TypeCarte.POPULARITE,
             "Discours Inspirant",
             "Augmente votre prime de 1.",
             (joueur, adversaire) -> {
-                joueur.changerPime(1);
+                joueur.changerPrime(1);
             }
         );
 
         Carte mainDeFer = new EffetInstantane(
-            TypeCarte.ATTAQUE,
+            TypeCarte.POPULARITE,
             "Main de Fer",
             "Gagne 2 de prime, mais perd 1 point de vie.",
             (joueur, adversaire) -> {
                 joueur.changerPv(-1);
-                joueur.changerPime(2);
+                joueur.changerPrime(2);
             }
         );
 
@@ -108,16 +108,16 @@ public class Deck {
             "Inflige 3 points de dégâts à l’adversaire, mais vous perdez 1 de prime.",
             (joueur, adversaire) -> {
                 adversaire.changerPv(-3);
-                joueur.changerPime(-1);
+                joueur.changerPrime(-1);
             }
         );
 
         Carte carteAuTresor = new EffetInstantane(
-            TypeCarte.SOUTIEN,
+            TypeCarte.POPULARITE,
             "Carte au Trésor",
             "Gagnez 3 de prime.",
             (joueur, adversaire) -> {
-                joueur.changerPime(3);
+                joueur.changerPrime(3);
             }
         );
 
@@ -127,7 +127,7 @@ public class Deck {
             "Vous gagnez 1 PV et 1 de prime.",
             (joueur, adversaire) -> {
                 joueur.changerPv(1);
-                joueur.changerPime(1);
+                joueur.changerPrime(1);
             }
         );
 
@@ -145,7 +145,7 @@ public class Deck {
             "Chant des Sirènes",
             "L’adversaire perd 1 point de prime, envoûté par un chant mystérieux.",
             (joueur, adversaire) -> {
-                adversaire.changerPime(-1);
+                adversaire.changerPrime(-1);
             }
         );
 
@@ -155,8 +155,8 @@ public class Deck {
             "Inflige 2 dégâts à l’adversaire et vole 1 de prime.",
             (joueur, adversaire) -> {
                 adversaire.changerPv(-2);
-                adversaire.changerPime(-1);
-                joueur.changerPime(1);
+                adversaire.changerPrime(-1);
+                joueur.changerPrime(1);
             }
         );
 
@@ -181,6 +181,16 @@ public class Deck {
                 joueur.changerPv(-1);
             }
         );
+        
+        Carte volDIdentite = new EffetInstantane(
+        		TypeCarte.POPULARITE,
+        		"Vol d'Identité",
+        		"Copie la prime de votre adversaire et laisse la sienne à zéro",
+        		(joueur, adversaire) -> {
+        			joueur.setPrime(adversaire.getPrime());
+        			adversaire.setPrime(0);
+        		}
+        	);
 
         return new ArrayList<>(Arrays.asList(
             discoursInspirant,
@@ -194,7 +204,8 @@ public class Deck {
             chantDesSirenes,
             abordage,
             tempeteEnMer,
-            criDeLaKraken
+            criDeLaKraken,
+            volDIdentite
         ));
     }
 
