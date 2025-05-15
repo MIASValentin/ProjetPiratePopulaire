@@ -82,13 +82,5 @@ public class Pirate {
 	public void melangerDeck() {
 		deck.melangerCartes();
 	}
-
-	
-//	public void jouerCarte(Carte carte);
-//	public void choisirDeck(List<Carte> deck); 
-	
-	
-	
-	
 	
 }
