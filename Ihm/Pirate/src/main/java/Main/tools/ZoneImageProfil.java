@@ -20,7 +20,6 @@ import javax.imageio.ImageIO;
  */
 public final class ZoneImageProfil extends javax.swing.JPanel {
 
-    public boolean player1 = true;
     private Image photoProfil;
     
     private String pathPirate1 ="\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg";
@@ -28,14 +27,14 @@ public final class ZoneImageProfil extends javax.swing.JPanel {
     
     public ZoneImageProfil() {
         initComponents();
-        ajouterImage();
+        ajouterImage(true);
     }
     
-    public void ChangePlayer(){
-        player1 = !player1;
+    public void ChangePlayer(boolean player1){
+        ajouterImage(player1);
     }
     
-    private void ajouterImage(){
+    private void ajouterImage(boolean player1){
         String localPirateAdresse = (System.getProperty("user.dir"));
         File path;
         if (player1){

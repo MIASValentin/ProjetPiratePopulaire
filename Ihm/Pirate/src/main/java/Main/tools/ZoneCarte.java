@@ -11,6 +11,8 @@ import java.awt.Point;
  * @author pauli
  */
 public class ZoneCarte extends javax.swing.JPanel {
+    private String desc ="ceci est un texte assez long pour avoir des choses a dire meme beaucoup de choses a dire, enfait cest un test";
+    private boolean activated = true;
     private boolean moving = false;
     private Point posPrec;
     /**
@@ -18,10 +20,7 @@ public class ZoneCarte extends javax.swing.JPanel {
      */
     public ZoneCarte() {
         initComponents();
-        nomCarte.setBounds(10, 10, 100, 30);
-        descriptionCarte.setBounds(10, 30, 100, 30);
-        effetCarte.setBounds(10, 50, 100, 30);
-
+        jLabel1.setText("<html>"+desc+"</html>");
     }
 
     /**
@@ -34,13 +33,12 @@ public class ZoneCarte extends javax.swing.JPanel {
     private void initComponents() {
 
         nomCarte = new javax.swing.JLabel();
-        descriptionCarte = new javax.swing.JLabel();
-        effetCarte = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 255, 102));
-        setMaximumSize(new java.awt.Dimension(120, 120));
-        setMinimumSize(new java.awt.Dimension(120, 120));
-        setPreferredSize(new java.awt.Dimension(120, 120));
+        setMaximumSize(new java.awt.Dimension(120, 190));
+        setMinimumSize(new java.awt.Dimension(120, 190));
+        setPreferredSize(new java.awt.Dimension(120, 190));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -55,40 +53,43 @@ public class ZoneCarte extends javax.swing.JPanel {
             }
         });
 
+        nomCarte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nomCarte.setText("NomCarte");
 
-        descriptionCarte.setText("Description");
-
-        effetCarte.setText("effetCarte");
+        jLabel1.setText("ceci est un texte assez long pour avoir des choses a dire meme beaucoup de choses a dire, enfait cest un test");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(effetCarte)
-                    .addComponent(descriptionCarte)
-                    .addComponent(nomCarte))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(nomCarte, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addComponent(nomCarte)
-                .addGap(50, 50, 50)
-                .addComponent(descriptionCarte)
-                .addGap(55, 55, 55)
-                .addComponent(effetCarte)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        jLabel1.getAccessibleContext().setAccessibleName("label");
     }// </editor-fold>//GEN-END:initComponents
 
+    public void desactivate(){
+        moving = false;
+        activated = false;
+    }
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        moving = true;
-        posPrec = evt.getPoint();
+        if (activated){
+            moving = true;
+            posPrec = evt.getPoint();
+        }
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -104,8 +105,7 @@ public class ZoneCarte extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel descriptionCarte;
-    private javax.swing.JLabel effetCarte;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nomCarte;
     // End of variables declaration//GEN-END:variables
 }

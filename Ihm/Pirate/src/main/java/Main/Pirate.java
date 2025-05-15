@@ -1,16 +1,21 @@
 package Main;
 
+import Main.tools.ZoneBundle;
 import Main.tools.ZoneCarte;
-import Main.tools.ZoneHand;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,9 +27,12 @@ import javax.imageio.ImageIO;
  * @author pauli
  */
 public class Pirate extends javax.swing.JFrame {
-    Point TailleZoneHand = new Point(800, 500);
     Image pirateIcon;
     private ArrayList<ZoneCarte> cartes = new ArrayList();
+    private ArrayList<ZoneBundle> bundles = new ArrayList();
+    
+    //a modifier lors de l'import sur eclipse
+    private boolean player1 = true;
     
     /**
      * Creates new form Pirate
@@ -45,31 +53,127 @@ public class Pirate extends javax.swing.JFrame {
         super.addNotify();
         zoneJeu1.setMainFrame(this);
         zoneHand1.setMainFrame(this);
+        zoneDeck1.setMainFrame(this);
+        glassPanelCreation();
+    }
+    
+    public void debutTour(){
+        debutBundle();
     }
     
     public void terminerTour(){
-        zoneJeu1.finTour();
-        debutBundle();
+        if (!zoneJeu1.finTour()){
+            System.out.println("nombre de cartes choisies invalide");
+            return;
+        }
+        for (int i =0; i<cartes.size(); i++){
+            cartes.get(i).setVisible(false);
+            remove(cartes.get(i));
+        }
+        resetHand();
+        System.out.println("calcul stat");
         changerJoueur();
     }
     
+    private void debutBundle(){
+        Container glassPane = (Container) this.getGlassPane();
+        glassPane.setVisible(true);
+        
+        for (int i=0; i<3; i++){
+            ZoneBundle bundle = new ZoneBundle();
+            
+            bundle.setSize(500, 190);
+            bundle.setLocation((getWidth()-bundle.getWidth())/2,
+                    ((getHeight()/4)*i)+(getHeight()/16)*(i+1));
+            
+            System.out.println(bundle.getLocation());
+
+            this.add(bundle);
+            bundle.setVisible(true);
+            bundles.add(bundle);
+            this.repaint();
+        }
+        
+        
+        
+    }
+    
+    private void glassPanelCreation(){
+        this.setGlassPane(new JComponent(){
+            @Override
+            protected void paintComponent(Graphics g){
+                g.setColor(new Color(0,0,0,0));
+                g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        }});
+        
+        Container glassPane = (Container) this.getGlassPane();
+        
+        glassPane.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                for (int i =0; i<bundles.size(); i++){
+                    Point temp = bundles.get(i).getLocation();
+                    if (temp.x< e.getPoint().x && (temp.x+bundles.get(i).getWidth())>e.getPoint().x &&
+                            temp.y< e.getPoint().y && temp.y+bundles.get(i).getHeight()>e.getPoint().y){
+                        finBundle(i);
+                        return;
+                    }
+                }
+                
+                
+            }
+        });
+        
+        repaint();
+    }
     public void changerJoueur(){
-        
+        int pvJ1 = 2;
+        int pvJ2 = 8;
+        int popJ1 = -4;
+        int popJ2 = 4;
+        zoneDeck1.switchClickable();
+        player1=!player1;
+        zoneImageProfil1.ChangePlayer(player1);
+        zoneImageProfil2.ChangePlayer(!player1);
+        if (player1){
+            zonePV1.updateStat(pvJ1);
+            zonePV2.updateStat(pvJ2);
+            zonePopularite1.updateStat(popJ1);
+            zonePopularite2.updateStat(popJ2);
+        }else{
+            zonePV1.updateStat(pvJ2);
+            zonePV2.updateStat(pvJ1);
+            zonePopularite1.updateStat(popJ2);
+            zonePopularite2.updateStat(popJ1);
+        }
     }
     
-    public void debutBundle(){
-        finTourButton.setEnabled(false);
+    private void finBundle(int choix){
+        Container glassPane = (Container) this.getGlassPane();
+        glassPane.setVisible(false);
         
+        System.out.println("le bundle choisi est: "+choix);
         
-    }
-    
-    public void finBundle(){
-        
+        for (int i=0; i<bundles.size(); i++){
+            bundles.get(i).setVisible(false);
+            remove(bundles.get(i));
+        }
+        bundles = new ArrayList();
+        zoneHand1.spawnCard();
+        zoneHand1.spawnCard();
+        zoneHand1.spawnCard();
+        zoneHand1.spawnCard();
+        zoneHand1.spawnCard();
+        cartes.getLast().setVisible(false);
+        remove(cartes.getLast());
+        cartes.removeLast();
+        revalidate();
     }
     
     public ArrayList<ZoneCarte> getCartes(){
         return cartes;
     }
+    
     public void addCarte(ZoneCarte carte){
         this.setComponentZOrder(carte, 0);
         this.repaint();
@@ -99,12 +203,13 @@ public class Pirate extends javax.swing.JFrame {
         zonePopularite2 = new Main.tools.ZonePopularite();
         zonePV2 = new Main.tools.ZonePV();
         finTourButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        zoneBundle1 = new Main.tools.ZoneBundle();
+        zoneDeck1 = new Main.tools.ZoneDeck();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PiratePopulaire");
         setIconImage(pirateIcon);
+        setMaximumSize(new java.awt.Dimension(1200, 600));
+        setMinimumSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
         javax.swing.GroupLayout zonePopularite1Layout = new javax.swing.GroupLayout(zonePopularite1);
@@ -186,48 +291,50 @@ public class Pirate extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("debuter tour");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton2MousePressed(evt);
-            }
-        });
+        javax.swing.GroupLayout zoneDeck1Layout = new javax.swing.GroupLayout(zoneDeck1);
+        zoneDeck1.setLayout(zoneDeck1Layout);
+        zoneDeck1Layout.setHorizontalGroup(
+            zoneDeck1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        zoneDeck1Layout.setVerticalGroup(
+            zoneDeck1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(zonePV2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(zoneImageProfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(zonePV2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(zoneImageProfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(zoneDeck1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 57, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(zoneHand1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(zonePopularite1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(zoneImageProfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(zoneHand1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(zonePopularite1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(zoneImageProfil1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(zonePopularite2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(finTourButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(zoneJeu1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
-                                .addComponent(zoneBundle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(finTourButton)
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(zoneJeu1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -238,18 +345,15 @@ public class Pirate extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                                .addComponent(zoneJeu1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGap(80, 187, Short.MAX_VALUE)
                                 .addComponent(finTourButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addGap(59, 59, 59)
-                                .addComponent(zoneBundle1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(132, 132, 132)
+                                .addComponent(zonePV1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(zoneJeu1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(zoneHand1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addComponent(zoneImageProfil1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -260,7 +364,9 @@ public class Pirate extends javax.swing.JFrame {
                             .addComponent(zoneImageProfil2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(zonePV2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(zoneDeck1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)))
                 .addContainerGap())
         );
 
@@ -271,23 +377,9 @@ public class Pirate extends javax.swing.JFrame {
         terminerTour();
     }//GEN-LAST:event_finTourButtonMouseClicked
 
-    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        
-    }//GEN-LAST:event_jButton2MousePressed
-
     /**
      * @param args the command line arguments
      */
-    
-    @Override
-    public void paintComponents(Graphics g) {
-        super.paintComponents(g);
-        g.drawRect(800, 800, TailleZoneHand.y, TailleZoneHand.x);
-    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -322,8 +414,7 @@ public class Pirate extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton finTourButton;
-    private javax.swing.JButton jButton2;
-    private Main.tools.ZoneBundle zoneBundle1;
+    private Main.tools.ZoneDeck zoneDeck1;
     private Main.tools.ZoneHand zoneHand1;
     private Main.tools.ZoneImageProfil zoneImageProfil1;
     private Main.tools.ZoneImageProfil zoneImageProfil2;

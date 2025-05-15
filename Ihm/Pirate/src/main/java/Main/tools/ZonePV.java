@@ -56,8 +56,12 @@ public class ZonePV extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateStat(int health){
+        this.health = health;
+        repaint();
+    }
     
-    protected void ajouterImage(File fichierImage){
+    private void ajouterImage(File fichierImage){
         try {
             // lire l'image
             image = ImageIO.read(fichierImage);

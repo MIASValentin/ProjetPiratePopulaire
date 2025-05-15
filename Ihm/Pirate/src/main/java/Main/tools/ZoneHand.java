@@ -57,7 +57,7 @@ public class ZoneHand extends javax.swing.JPanel {
     public void spawnCard(){
         ZoneCarte newCarte = new ZoneCarte();
         mainFrame.add(newCarte);
-        newCarte.setSize(120, 120);
+        newCarte.setSize(120, 190);
         int unitWidth = getWidth()/5;
         newCarte.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1)+getLocation().x,
                 (getHeight()-(newCarte.getHeight()/2))/2+getLocation().y);

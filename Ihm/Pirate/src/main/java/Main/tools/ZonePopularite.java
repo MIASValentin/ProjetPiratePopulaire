@@ -21,8 +21,8 @@ import javax.imageio.ImageIO;
  */
 public class ZonePopularite extends javax.swing.JPanel {
     //les variables suivantes seront changées par des gets au code eclipse---
-    private int maxPop = 40000;
-    private int pop = 30000;
+    private int maxPop = 5;
+    private int pop = 0;
     //-----------------------------------------------------------------------
     
     private Image image;
@@ -58,7 +58,12 @@ public class ZonePopularite extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    protected void ajouterImage(File fichierImage){
+    public void updateStat(int pop){
+        this.pop = pop;
+        repaint();
+    }
+    
+    private void ajouterImage(File fichierImage){
         try {
             // lire l'image
             image = ImageIO.read(fichierImage);
@@ -76,7 +81,7 @@ public class ZonePopularite extends javax.swing.JPanel {
             g.drawImage(image, 0, 0, null);
         }
         popBarSize = getHeight()/2;
-        int endHealthHeight = popBarSize-((pop*popBarSize)/maxPop);
+        int endHealthHeight = popBarSize-(((pop+maxPop)*popBarSize)/(maxPop*2));
         g2.setStroke(new BasicStroke(3));
         if (pop!=maxPop){
             g2.setColor(Color.black);

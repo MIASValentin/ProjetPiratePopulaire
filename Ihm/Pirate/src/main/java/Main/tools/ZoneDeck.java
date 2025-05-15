@@ -5,27 +5,22 @@
 package Main.tools;
 
 import Main.Pirate;
-import java.awt.Point;
-import java.util.ArrayList;
 
 /**
  *
  * @author pauli
  */
-public class ZoneJeu extends javax.swing.JPanel {
+public class ZoneDeck extends javax.swing.JPanel {
 
-    Pirate mainFrame;
+    private Pirate mainFrame;
+    private boolean clickable = true;
     /**
-     * Creates new form ZoneJeu
+     * Creates new form ZoneDeck
      */
-    public ZoneJeu() {
+    public ZoneDeck() {
         initComponents();
     }
-    
-    public void setMainFrame(Pirate mainFrame) {
-        this.mainFrame = mainFrame;
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,40 +30,38 @@ public class ZoneJeu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(242, 242, 0));
+        setBackground(new java.awt.Color(0, 153, 0));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 754, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 120, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean finTour(){
-        ArrayList<ZoneCarte> cartes = mainFrame.getCartes();
-        Point posBasDroite = new Point(getLocation().x+getWidth(),
-                                    getLocation().y+getHeight());
-        boolean carteJouee = false;
-        for (int i =0; i<cartes.size(); i++){
-            Point cLoc = cartes.get(i).getLocation();
-            if(getLocation().x < cLoc.x && cLoc.x < posBasDroite.x &&
-                    getLocation().y < cLoc.y && cLoc.y < posBasDroite.y){
-                System.out.println("Jouer Carte: "+ cartes.get(i).getName());
-                
-                if (carteJouee){
-                    return false;
-                }
-                carteJouee=true;
-            }
-        }
-        return carteJouee;
+    public void setMainFrame(Pirate mainFrame) {
+        this.mainFrame = mainFrame;
     }
-    
+    public void switchClickable(){
+        clickable = !clickable;
+    }
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if (clickable){
+            mainFrame.debutTour();
+            switchClickable();
+        }
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
