@@ -32,7 +32,10 @@ public class ZoneBundle extends javax.swing.JPanel {
         zoneCarte4.desactivate();
         repaint();
     }
-    
+    public void recalculate(){
+        repaint();
+        revalidate();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
