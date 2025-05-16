@@ -22,6 +22,7 @@ import entities.Carte;
  */
 public class ZoneBundle extends javax.swing.JPanel {
 
+	private PirateFrame mainFrame;
 	private ArrayList<Carte> bundle;
     /**
      * Creates new form Bundle
@@ -41,12 +42,32 @@ public class ZoneBundle extends javax.swing.JPanel {
         zoneCarte3.updateVisuel();
     }
     
+    public void setMainFrame(PirateFrame mf) {
+    	this.mainFrame = mf;
+    }
+    
     @Override
     public void addNotify() {
         super.addNotify();
         zoneCarte1.desactivate();
         zoneCarte2.desactivate();
         zoneCarte3.desactivate();
+        
+        JPanel glassPanel = new JPanel();
+        ZoneBundle temp = this;
+        glassPanel.setSize(getWidth(), getHeight());
+        glassPanel.setLocation(0,0);
+        glassPanel.setBackground(new Color(0,0,0,1));
+        
+        glassPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mainFrame.finBundle(temp);
+            }
+        });        
+        this.add(glassPanel);
+        this.setComponentZOrder(glassPanel, 0);
+        
         repaint();
     }
     

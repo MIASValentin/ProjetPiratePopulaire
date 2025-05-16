@@ -91,7 +91,7 @@ public class ZonePV extends javax.swing.JPanel {
         }
         healthBarSize = getWidth()/2;
         int endHealthWidth = (health*healthBarSize)/maxHealth;
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(new BasicStroke(10));
         g2.setColor(Color.red);
         g2.drawLine(getWidth()/4, getHeight()/2, getWidth()/4+endHealthWidth, getHeight()/2);
         if (health!=maxHealth){

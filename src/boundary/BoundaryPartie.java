@@ -79,8 +79,13 @@ public class BoundaryPartie {
 			System.out.println("Il y a eu égalité...");
 		}
 		else {
-			System.out.println("Le gagnant est : le joueur " + gagnant + "!");
+			System.out.println(getGagnantString());
 		}
+	}
+	
+	public String getGagnantString() {
+		int gagnant = controlPartie.getGagnant();
+		return "Le gagnant est : le joueur " + gagnant + "!";
 	}
 	public void melangerDeck() {
 		controlPartie.melangerDeck();

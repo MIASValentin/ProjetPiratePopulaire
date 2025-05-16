@@ -146,7 +146,10 @@ public class PirateFrame extends javax.swing.JFrame {
     }
     
     public void finJeu() {
-    	
+    	GameOver frameGO = new GameOver();
+    	frameGO.setVisible(true);
+    	frameGO.setGagnant(boundaryPartie.getGagnantString());
+    	this.dispose();
     }
     
     public void terminerTour(){
@@ -175,15 +178,16 @@ public class PirateFrame extends javax.swing.JFrame {
         
         for (int i=0; i<3; i++){
             ZoneBundle bundle = new ZoneBundle();
+            bundle.setMainFrame(this);
             bundle.setBundle(lBundle.get(i));
             
             bundle.setSize(500, 190);
             bundle.setLocation((getWidth()-bundle.getWidth())/2,
                     ((bundle.getHeight())*i)+50);
 
-            this.add(bundle);
+            glassPane.add(bundle);
             bundle.setVisible(true);
-            this.setComponentZOrder(bundle, 0);
+            glassPane.setComponentZOrder(bundle, 0);
             bundles.add(bundle);
             repaint();
         }
@@ -205,16 +209,7 @@ public class PirateFrame extends javax.swing.JFrame {
         glassPane.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e) {
-                for (int i =0; i<bundles.size(); i++){
-                    Point temp = bundles.get(i).getLocation();
-                    if (temp.x< e.getPoint().x && (temp.x+bundles.get(i).getWidth())>e.getPoint().x &&
-                            temp.y< (e.getPoint().y-30) && (temp.y+bundles.get(i).getHeight())>(e.getPoint().y)){
-                        finBundle(i);
-                        return;
-                    }
-                }
-                
-                
+                return;
             }
         });
         
@@ -238,7 +233,7 @@ public class PirateFrame extends javax.swing.JFrame {
         }
     }
     
-    private void finBundle(int choix){
+    public void finBundle(ZoneBundle choix){
         Container glassPane = (Container) this.getGlassPane();
         glassPane.setVisible(false);
         
@@ -250,7 +245,7 @@ public class PirateFrame extends javax.swing.JFrame {
         }
         
         Deck deck = boundaryPartie.getJoueurCourant().getDeck();
-        deck.getCartes().addAll(bundles.get(choix).getCartes());
+        deck.getCartes().addAll(choix.getCartes());
         deck.melangerCartes();
         boundaryPartie.getJoueurCourant().setDeck(deck);
         boundaryPartie.getJoueurCourant().piocherCarte(4);
@@ -381,7 +376,8 @@ public class PirateFrame extends javax.swing.JFrame {
             .addGap(0, 60, Short.MAX_VALUE)
         );
 
-        finTourButton.setBackground(new java.awt.Color(141, 111, 88));
+        finTourButton.setBackground(Color.black);
+        finTourButton.setForeground(Color.white);
         finTourButton.setText("Prochain Tour");
         finTourButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

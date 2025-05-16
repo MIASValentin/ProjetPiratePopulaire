@@ -93,7 +93,7 @@ public class ZonePopularite extends javax.swing.JPanel {
         }
         popBarSize = getHeight()/2;
         int endHealthHeight = popBarSize-(((pop+maxPop)*popBarSize)/(maxPop*2));
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(new BasicStroke(10));
         if (pop!=maxPop){
             g2.setColor(Color.black);
             g2.drawLine(getWidth()/2, getHeight()/4, getWidth()/2, getHeight()/4+endHealthHeight);            
