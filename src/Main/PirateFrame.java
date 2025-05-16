@@ -18,6 +18,12 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import boundary.*;
+import control.ControlChoisirBundle;
+import control.ControlJouerCarte;
+import control.ControlPartie;
+import entities.Deck;
+import entities.Partie;
+import entities.Pirate;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -32,6 +38,15 @@ public class PirateFrame extends javax.swing.JFrame {
     Image pirateIcon;
     private ArrayList<ZoneCarte> cartes = new ArrayList();
     private ArrayList<ZoneBundle> bundles = new ArrayList();
+    
+    private Pirate joueur1;
+    private Pirate joueur2;
+    private Partie partie;
+    
+    private BoundaryPartie boundaryPartie; 
+	private BoundaryJouerCarte boundaryJouerCarte; 
+	private BoundaryChoisirBundle boundaryChoisirBundle;
+    
     
     //a modifier lors de l'import sur eclipse
     private boolean player1 = true;
@@ -57,6 +72,7 @@ public class PirateFrame extends javax.swing.JFrame {
         zoneHand1.setMainFrame(this);
         zoneDeck1.setMainFrame(this);
         glassPanelCreation();
+        initObject();
         repaint();
         
         
@@ -66,6 +82,30 @@ public class PirateFrame extends javax.swing.JFrame {
         background.setSize(getWidth(), getHeight());
         background.setLocation(0,0);
         this.add(background);
+    }
+    
+    public void initObject() {
+    	this.joueur1 = new Pirate(10, 0, 1); 
+    	this.joueur2 = new Pirate(10, 0, 2); 
+		
+		Deck deckJoueur1 = new Deck(); 
+		Deck deckJoueur2 = new Deck();
+		Deck bundleAleatoire = new Deck();
+		
+		joueur1.setDeck(deckJoueur1);
+		joueur2.setDeck(deckJoueur2);
+		
+		
+		this.partie = new Partie(joueur1, joueur2);
+		
+		ControlPartie controlPartie = new ControlPartie(partie); 
+		ControlJouerCarte controlJouerCarte = new ControlJouerCarte(controlPartie); 
+		ControlChoisirBundle controlChoisirBundle = new ControlChoisirBundle(bundleAleatoire);
+		
+		this.boundaryPartie = new BoundaryPartie(controlPartie); 
+		this.boundaryJouerCarte = new BoundaryJouerCarte(controlJouerCarte); 
+		this.boundaryChoisirBundle = new BoundaryChoisirBundle(controlChoisirBundle);
+		boundaryPartie.initPartie(); // pioche des 4 cartes
     }
     
     public void debutTour(){
