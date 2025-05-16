@@ -31,7 +31,7 @@ public class ZonePopularite extends javax.swing.JPanel {
     public ZonePopularite() {
         initComponents();
         String localPirateAdresse = (System.getProperty("user.dir"));
-        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\bouteille_dressee.jpg");
         ajouterImage(path);
         repaint();
     }

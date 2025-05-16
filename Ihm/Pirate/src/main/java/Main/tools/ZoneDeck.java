@@ -5,6 +5,13 @@
 package Main.tools;
 
 import Main.Pirate;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -12,6 +19,7 @@ import Main.Pirate;
  */
 public class ZoneDeck extends javax.swing.JPanel {
 
+    private Image imageCarte;
     private Pirate mainFrame;
     private boolean clickable = true;
     /**
@@ -19,6 +27,13 @@ public class ZoneDeck extends javax.swing.JPanel {
      */
     public ZoneDeck() {
         initComponents();
+        try {
+            // lire l'image
+            imageCarte = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\resource\\carte_dos.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        repaint();
     }
 
     /**
@@ -48,7 +63,16 @@ public class ZoneDeck extends javax.swing.JPanel {
             .addGap(0, 120, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(imageCarte != null){
+            imageCarte = imageCarte.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(imageCarte, 0, 0, null);
+        }
+    }
+    
     public void setMainFrame(Pirate mainFrame) {
         this.mainFrame = mainFrame;
     }

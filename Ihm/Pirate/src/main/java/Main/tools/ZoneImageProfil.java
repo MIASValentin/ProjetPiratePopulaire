@@ -22,8 +22,8 @@ public final class ZoneImageProfil extends javax.swing.JPanel {
 
     private Image photoProfil;
     
-    private String pathPirate1 ="\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg";
-    private String pathPirate2 ="\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg";
+    private String pathPirate1 ="\\src\\main\\java\\resource\\pirate1.jpg";
+    private String pathPirate2 ="\\src\\main\\java\\resource\\pirate2.jpg";
     
     public ZoneImageProfil() {
         initComponents();

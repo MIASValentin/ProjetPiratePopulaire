@@ -31,7 +31,7 @@ public class ZonePV extends javax.swing.JPanel {
     public ZonePV() {
         initComponents();
         String localPirateAdresse = (System.getProperty("user.dir"));
-        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\Projet_Pirate_Populaire.jpg");
+        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\bouteille_penchee.jpg");
         ajouterImage(path);
         repaint();
     }

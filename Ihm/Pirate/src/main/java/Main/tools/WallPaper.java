@@ -16,14 +16,18 @@ import javax.imageio.ImageIO;
 public class WallPaper extends javax.swing.JPanel {
     
     private BufferedImage background;
+    public String adresse = "\\src\\main\\java\\resource\\wallpaper.jpg";
 
     /**
      * Creates new form WallPaper
      */
     public WallPaper() {
         initComponents();
+        fileSetup();
+    }
+    public void fileSetup(){
         String localPirateAdresse = (System.getProperty("user.dir"));
-        File path = new File(localPirateAdresse + "\\src\\main\\java\\resource\\wallpaper.jpg");
+        File path = new File(localPirateAdresse + adresse);
         try{
             background = ImageIO.read(path);
         }catch(Exception e){
@@ -31,7 +35,6 @@ public class WallPaper extends javax.swing.JPanel {
         }
         repaint();
     }
-
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);

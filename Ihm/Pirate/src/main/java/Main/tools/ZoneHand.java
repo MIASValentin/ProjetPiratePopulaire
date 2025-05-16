@@ -5,6 +5,13 @@
 package Main.tools;
 
 import Main.Pirate;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,11 +22,19 @@ public class ZoneHand extends javax.swing.JPanel {
     /**
      * Creates new form ZoneHand
      */
+    private Image imageCarte;
     private int nbCard = 0;
     private Pirate mainFrame;
     
     public ZoneHand() {
         initComponents();
+        try {
+            // lire l'image
+            imageCarte = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\resource\\main.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        repaint();
     }
     
     public void setMainFrame(Pirate mainFrame) {
@@ -45,11 +60,19 @@ public class ZoneHand extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(imageCarte != null){
+            imageCarte = imageCarte.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(imageCarte, 0, 0, null);
+        }
+    }
     public void reset(){
         nbCard = 0;
     }
@@ -59,8 +82,8 @@ public class ZoneHand extends javax.swing.JPanel {
         mainFrame.add(newCarte);
         newCarte.setSize(120, 190);
         int unitWidth = getWidth()/5;
-        newCarte.setLocation((unitWidth*nbCard)+(unitWidth/5)*(nbCard+1)+getLocation().x,
-                (getHeight()-(newCarte.getHeight()/2))/2+getLocation().y);
+        newCarte.setLocation((unitWidth*nbCard)+(unitWidth/4)*(nbCard+1)+getLocation().x,
+                (getHeight()-newCarte.getHeight())/2+getLocation().y+30);
         mainFrame.addCarte(newCarte);
         nbCard+=1;
     }

@@ -4,7 +4,14 @@
  */
 package Main.tools;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -12,6 +19,8 @@ import java.awt.Point;
  */
 public class ZoneCarte extends javax.swing.JPanel {
     private String desc ="ceci est un texte assez long pour avoir des choses a dire meme beaucoup de choses a dire, enfait cest un test";
+    
+    private Image imageCarte;
     private boolean activated = true;
     private boolean moving = false;
     private Point posPrec;
@@ -20,6 +29,13 @@ public class ZoneCarte extends javax.swing.JPanel {
      */
     public ZoneCarte() {
         initComponents();
+        try {
+            // lire l'image
+            imageCarte = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\resource\\carte_face.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        repaint();
         jLabel1.setText("<html>"+desc+"</html>");
     }
 
@@ -35,7 +51,7 @@ public class ZoneCarte extends javax.swing.JPanel {
         nomCarte = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(102, 255, 102));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(120, 190));
         setMinimumSize(new java.awt.Dimension(120, 190));
         setPreferredSize(new java.awt.Dimension(120, 190));
@@ -84,6 +100,15 @@ public class ZoneCarte extends javax.swing.JPanel {
     public void desactivate(){
         moving = false;
         activated = false;
+    }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(imageCarte != null){
+            imageCarte = imageCarte.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(imageCarte, 0, 0, null);
+        }
     }
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         if (activated){

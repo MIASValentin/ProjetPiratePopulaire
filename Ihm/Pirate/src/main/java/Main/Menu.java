@@ -4,12 +4,7 @@
  */
 package Main;
 
-import Main.Pirate;
-import Main.Pirate;
-import Main.tools.ZoneImageProfil;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

@@ -30,6 +30,7 @@ public class ZoneBundle extends javax.swing.JPanel {
         zoneCarte2.desactivate();
         zoneCarte3.desactivate();
         zoneCarte4.desactivate();
+        repaint();
     }
     
     /**

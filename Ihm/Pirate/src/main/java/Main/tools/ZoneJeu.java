@@ -5,8 +5,15 @@
 package Main.tools;
 
 import Main.Pirate;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -14,12 +21,20 @@ import java.util.ArrayList;
  */
 public class ZoneJeu extends javax.swing.JPanel {
 
+    private Image imageCarte;
     Pirate mainFrame;
     /**
      * Creates new form ZoneJeu
      */
     public ZoneJeu() {
         initComponents();
+        try {
+            // lire l'image
+            imageCarte = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\main\\java\\resource\\carte_emplacement.jpg"));
+        } catch (IOException ex) {
+            Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        repaint();
     }
     
     public void setMainFrame(Pirate mainFrame) {
@@ -49,6 +64,15 @@ public class ZoneJeu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(imageCarte != null){
+            imageCarte = imageCarte.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+            g.drawImage(imageCarte, 0, 0, null);
+        }
+    }
+    
     public boolean finTour(){
         ArrayList<ZoneCarte> cartes = mainFrame.getCartes();
         Point posBasDroite = new Point(getLocation().x+getWidth(),
