@@ -43,9 +43,9 @@ public class TestPirate {
 
     @Test
     void testChangerPime() {
-        pirate.changerPime(4);
+        pirate.changerPrime(4);
         assertEquals(4, pirate.getPrime(), "Prime doit augmenter de 4");
-        pirate.changerPime(-2);
+        pirate.changerPrime(-2);
         assertEquals(2, pirate.getPrime(), "Prime doit diminuer de 2");
     }
 
@@ -67,7 +67,7 @@ public class TestPirate {
     }
 
     @Test
-    void testPiocherCarte_reducesDeckAndFillsMain() {
+    void testPiocherCarteReducesDeckAndFillsMain() {
         Deck deckBefore = pirate.getDeck();
         int deckSize = deckBefore.getNbCarte();
         int draw = 5;
@@ -77,7 +77,7 @@ public class TestPirate {
     }
 
     @Test
-    void testPiocherCarte_overdraw() {
+    void testPiocherCarteOverdraw() {
         Deck deckBefore = pirate.getDeck();
         int deckSize = deckBefore.getNbCarte();
         int draw = deckSize + 5;
@@ -95,7 +95,7 @@ public class TestPirate {
     }
 
     @Test
-    void testMelangerDeck_keepsSameCards() {
+    void testMelangerDeckKeepsSameCards() {
         Deck d = pirate.getDeck();
         List<Carte> before = new ArrayList<>(d.getCartes());
         pirate.melangerDeck();
