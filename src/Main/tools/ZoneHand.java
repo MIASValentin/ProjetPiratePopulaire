@@ -5,6 +5,8 @@
 package Main.tools;
 
 import Main.PirateFrame;
+import entities.Carte;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -77,8 +79,12 @@ public class ZoneHand extends javax.swing.JPanel {
         nbCard = 0;
     }
     
-    public void spawnCard(){
+    public void spawnCard(Carte carte){
         ZoneCarte newCarte = new ZoneCarte();
+        if (carte!=null) {
+	        newCarte.setCarteNf(carte);
+	        newCarte.updateVisuel();
+        }
         mainFrame.add(newCarte);
         newCarte.setSize(120, 190);
         int unitWidth = getWidth()/5;

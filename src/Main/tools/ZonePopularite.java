@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+import Main.PirateFrame;
+
 /**
  *
  * @author pauli
@@ -27,6 +29,7 @@ public class ZonePopularite extends javax.swing.JPanel {
     
     private Image image;
     private int popBarSize;
+    PirateFrame mainFrame;
     
     public ZonePopularite() {
         initComponents();
@@ -34,6 +37,10 @@ public class ZonePopularite extends javax.swing.JPanel {
         File path = new File(localPirateAdresse + "\\src\\resource\\bouteille_dressee.jpg");
         ajouterImage(path);
         repaint();
+    }
+    
+    public void setMainFrame(PirateFrame mainFrame) {
+        this.mainFrame = mainFrame;
     }
     
 
@@ -58,9 +65,13 @@ public class ZonePopularite extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateStat(int pop){
-        this.pop = pop;
-        repaint();
+    public void updateStat(int numJoueur){
+    	if (numJoueur==1) {
+    		this.pop = mainFrame.getPirate1().getPrime();
+    	}else{
+    		this.pop = mainFrame.getPirate2().getPrime();
+    	}
+    	repaint();
     }
     
     private void ajouterImage(File fichierImage){

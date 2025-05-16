@@ -8,7 +8,13 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
+import Main.PirateFrame;
+import entities.Carte;
 
 /**
  *
@@ -16,6 +22,7 @@ import javax.swing.JPanel;
  */
 public class ZoneBundle extends javax.swing.JPanel {
 
+	private ArrayList<Carte> bundle;
     /**
      * Creates new form Bundle
      */
@@ -23,19 +30,42 @@ public class ZoneBundle extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setBundle(ArrayList<Carte> bundle) {
+    	this.bundle = bundle;
+    	zoneCarte1.setCarteNf(bundle.get(0));
+        zoneCarte2.setCarteNf(bundle.get(1));
+        zoneCarte3.setCarteNf(bundle.get(2));
+
+        zoneCarte1.updateVisuel();
+        zoneCarte2.updateVisuel();
+        zoneCarte3.updateVisuel();
+    }
+    
     @Override
     public void addNotify() {
         super.addNotify();
         zoneCarte1.desactivate();
         zoneCarte2.desactivate();
         zoneCarte3.desactivate();
-        zoneCarte4.desactivate();
         repaint();
     }
+    
     public void recalculate(){
         repaint();
         revalidate();
     }
+    
+    public Carte getCarte1() {
+		return zoneCarte1.getCarteNf();
+	}
+    
+    public Carte getCarte2() {
+		return zoneCarte2.getCarteNf();
+	}
+    
+    public Carte getCarte3() {
+		return zoneCarte3.getCarteNf();
+	}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +79,6 @@ public class ZoneBundle extends javax.swing.JPanel {
         zoneCarte1 = new Main.tools.ZoneCarte();
         zoneCarte2 = new Main.tools.ZoneCarte();
         zoneCarte3 = new Main.tools.ZoneCarte();
-        zoneCarte4 = new Main.tools.ZoneCarte();
 
         setBackground(new Color(242, 242, 242, 0));
 
@@ -65,7 +94,6 @@ public class ZoneBundle extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(zoneCarte3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoneCarte4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -73,7 +101,6 @@ public class ZoneBundle extends javax.swing.JPanel {
             .addComponent(zoneCarte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(zoneCarte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(zoneCarte3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(zoneCarte4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -82,6 +109,5 @@ public class ZoneBundle extends javax.swing.JPanel {
     private Main.tools.ZoneCarte zoneCarte1;
     private Main.tools.ZoneCarte zoneCarte2;
     private Main.tools.ZoneCarte zoneCarte3;
-    private Main.tools.ZoneCarte zoneCarte4;
     // End of variables declaration//GEN-END:variables
 }

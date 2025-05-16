@@ -4,6 +4,7 @@
  */
 package Main.tools;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -13,12 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+import entities.Carte;
+
 /**
  *
  * @author pauli
  */
 public class ZoneCarte extends javax.swing.JPanel {
     private String desc ="ceci est un texte assez long pour avoir des choses a dire meme beaucoup de choses a dire, enfait cest un test";
+    
+    private Carte carteNf;
     
     private Image imageCarte;
     private boolean activated = true;
@@ -36,7 +41,6 @@ public class ZoneCarte extends javax.swing.JPanel {
             Logger.getLogger(ZoneImageProfil.class.getName()).log(Level.SEVERE, null, ex);
         }
         repaint();
-        jLabel1.setText("<html>"+desc+"</html>");
     }
 
     /**
@@ -97,6 +101,19 @@ public class ZoneCarte extends javax.swing.JPanel {
         jLabel1.getAccessibleContext().setAccessibleName("label");
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setCarteNf(Carte carteNf) {
+		this.carteNf = carteNf;
+	}
+    public Carte getCarteNf() {
+		return carteNf;
+	}
+    public void updateVisuel() {
+    	nomCarte.setForeground(Color.white);
+    	jLabel1.setForeground(Color.white);
+    	nomCarte.setText(carteNf.getNom());
+        jLabel1.setText("<html>"+carteNf.getDescription()+"</html>");
+    }
+    
     public void desactivate(){
         moving = false;
         activated = false;

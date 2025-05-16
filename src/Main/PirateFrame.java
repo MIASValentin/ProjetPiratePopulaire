@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -21,6 +22,7 @@ import boundary.*;
 import control.ControlChoisirBundle;
 import control.ControlJouerCarte;
 import control.ControlPartie;
+import entities.Carte;
 import entities.Deck;
 import entities.Partie;
 import entities.Pirate;
@@ -48,8 +50,6 @@ public class PirateFrame extends javax.swing.JFrame {
 	private BoundaryChoisirBundle boundaryChoisirBundle;
     
     
-    //a modifier lors de l'import sur eclipse
-    private boolean player1 = true;
     
     /**
      * Creates new form Pirate
@@ -71,10 +71,18 @@ public class PirateFrame extends javax.swing.JFrame {
         zoneJeu1.setMainFrame(this);
         zoneHand1.setMainFrame(this);
         zoneDeck1.setMainFrame(this);
+        zonePV1.setMainFrame(this);
+        zonePV2.setMainFrame(this);
+        zonePopularite1.setMainFrame(this);
+        zonePopularite2.setMainFrame(this);
         glassPanelCreation();
         initObject();
         repaint();
-        
+
+        zonePV1.updateStat(1);
+        zonePV2.updateStat(2);
+        zonePopularite1.updateStat(1);
+        zonePopularite2.updateStat(2);
         
         WallPaper background = new WallPaper();
         background.adresse = "\\src\\resource\\background.jpg";
@@ -83,6 +91,28 @@ public class PirateFrame extends javax.swing.JFrame {
         background.setLocation(0,0);
         this.add(background);
     }
+    
+    public Pirate getPirate1() {
+    	return joueur1;
+    }
+    
+    public Pirate getPirate2() {
+    	return joueur2;
+    }
+    
+    public Partie getPartie() {
+    	return partie;
+    }
+    
+    public BoundaryPartie getBoundaryPartie() {
+    	return boundaryPartie;
+    }
+    public BoundaryChoisirBundle getBoundaryChoisirBundle() {
+		return boundaryChoisirBundle;
+	}
+    public BoundaryJouerCarte getBoundaryJouerCarte() {
+		return boundaryJouerCarte;
+	}
     
     public void initObject() {
     	this.joueur1 = new Pirate(10, 0, 1); 
@@ -131,9 +161,11 @@ public class PirateFrame extends javax.swing.JFrame {
         Container glassPane = (Container) this.getGlassPane();
         glassPane.setVisible(true);
         setLayout(null);
+        List<ArrayList<Carte>> lBundle =  boundaryChoisirBundle.getBundles();
         
         for (int i=0; i<3; i++){
             ZoneBundle bundle = new ZoneBundle();
+            bundle.setBundle(lBundle.get(i));
             
             bundle.setSize(500, 190);
             bundle.setLocation((getWidth()-bundle.getWidth())/2,
@@ -184,19 +216,19 @@ public class PirateFrame extends javax.swing.JFrame {
         int popJ1 = -4;
         int popJ2 = 4;
         zoneDeck1.switchClickable();
-        player1=!player1;
+        boolean player1=boundaryPartie.getJoueurCourant().equals(joueur1);
         zoneImageProfil1.ChangePlayer(player1);
         zoneImageProfil2.ChangePlayer(!player1);
         if (player1){
-            zonePV1.updateStat(pvJ1);
-            zonePV2.updateStat(pvJ2);
-            zonePopularite1.updateStat(popJ1);
-            zonePopularite2.updateStat(popJ2);
+            zonePV1.updateStat(1);
+            zonePV2.updateStat(2);
+            zonePopularite1.updateStat(1);
+            zonePopularite2.updateStat(2);
         }else{
-            zonePV1.updateStat(pvJ2);
-            zonePV2.updateStat(pvJ1);
-            zonePopularite1.updateStat(popJ2);
-            zonePopularite2.updateStat(popJ1);
+            zonePV1.updateStat(2);
+            zonePV2.updateStat(1);
+            zonePopularite1.updateStat(2);
+            zonePopularite2.updateStat(1);
         }
     }
     
@@ -210,12 +242,13 @@ public class PirateFrame extends javax.swing.JFrame {
             bundles.get(i).setVisible(false);
             remove(bundles.get(i));
         }
+        
+        					//TODO: mettre les bundle dans deck et piocher cartes dans deck
+        zoneHand1.spawnCard(bundles.get(choix).getCarte1());
+        zoneHand1.spawnCard(bundles.get(choix).getCarte2());
+        zoneHand1.spawnCard(bundles.get(choix).getCarte3());
         bundles = new ArrayList();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
-        zoneHand1.spawnCard();
+        zoneHand1.spawnCard(null);
         cartes.getLast().setVisible(false);
         remove(cartes.getLast());
         cartes.removeLast();

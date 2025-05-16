@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+import Main.PirateFrame;
+
 /**
  *
  * @author pauli
@@ -27,6 +29,7 @@ public class ZonePV extends javax.swing.JPanel {
     
     private Image image;
     private int healthBarSize;
+    PirateFrame mainFrame;
     
     public ZonePV() {
         initComponents();
@@ -34,6 +37,10 @@ public class ZonePV extends javax.swing.JPanel {
         File path = new File(localPirateAdresse + "\\src\\resource\\bouteille_penchee.jpg");
         ajouterImage(path);
         repaint();
+    }
+    
+    public void setMainFrame(PirateFrame mainFrame) {
+        this.mainFrame = mainFrame;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,9 +63,13 @@ public class ZonePV extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateStat(int health){
-        this.health = health;
-        repaint();
+    public void updateStat(int numJoueur){
+    	if (numJoueur==1) {
+    		this.health = mainFrame.getPirate1().getPv();
+    	}else{
+    		this.health = mainFrame.getPirate2().getPv();
+    	}
+    	repaint();
     }
     
     private void ajouterImage(File fichierImage){
