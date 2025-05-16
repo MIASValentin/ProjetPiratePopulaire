@@ -82,7 +82,8 @@ public class ZoneJeu extends javax.swing.JPanel {
             Point cLoc = cartes.get(i).getLocation();
             if(getLocation().x < cLoc.x && cLoc.x < posBasDroite.x &&
                     getLocation().y < cLoc.y && cLoc.y < posBasDroite.y){
-                System.out.println("Jouer Carte: "+ cartes.get(i).getName());
+                System.out.println("Jouer Carte: "+ mainFrame.getBoundaryPartie().getJoueurCourant().getMain().get(i));
+                mainFrame.getBoundaryJouerCarte().appliquerEffet(i+1);
                 
                 if (carteJouee){
                     return false;

@@ -83,6 +83,8 @@ public class PirateFrame extends javax.swing.JFrame {
         zonePV2.updateStat(2);
         zonePopularite1.updateStat(1);
         zonePopularite2.updateStat(2);
+        zoneImageProfil2.ChangePlayer(false);
+        
         
         WallPaper background = new WallPaper();
         background.adresse = "\\src\\resource\\background.jpg";
@@ -143,6 +145,10 @@ public class PirateFrame extends javax.swing.JFrame {
         debutBundle();
     }
     
+    public void finJeu() {
+    	
+    }
+    
     public void terminerTour(){
         if (!zoneJeu1.finTour()){
             System.out.println("nombre de cartes choisies invalide");
@@ -154,6 +160,10 @@ public class PirateFrame extends javax.swing.JFrame {
         }
         resetHand();
         System.out.println("calcul stat");
+        if (boundaryPartie.estPartieFini()) {
+        	finJeu();
+        }
+        boundaryPartie.passerAuTourSuivant();
         changerJoueur();
     }
     
@@ -211,10 +221,6 @@ public class PirateFrame extends javax.swing.JFrame {
         repaint();
     }
     public void changerJoueur(){
-        int pvJ1 = 2;
-        int pvJ2 = 8;
-        int popJ1 = -4;
-        int popJ2 = 4;
         zoneDeck1.switchClickable();
         boolean player1=boundaryPartie.getJoueurCourant().equals(joueur1);
         zoneImageProfil1.ChangePlayer(player1);
@@ -243,10 +249,16 @@ public class PirateFrame extends javax.swing.JFrame {
             remove(bundles.get(i));
         }
         
-        					//TODO: mettre les bundle dans deck et piocher cartes dans deck
-        zoneHand1.spawnCard(bundles.get(choix).getCarte1());
-        zoneHand1.spawnCard(bundles.get(choix).getCarte2());
-        zoneHand1.spawnCard(bundles.get(choix).getCarte3());
+        Deck deck = boundaryPartie.getJoueurCourant().getDeck();
+        deck.getCartes().addAll(bundles.get(choix).getCartes());
+        deck.melangerCartes();
+        boundaryPartie.getJoueurCourant().setDeck(deck);
+        boundaryPartie.getJoueurCourant().piocherCarte(4);
+        
+        zoneHand1.spawnCard(boundaryPartie.getJoueurCourant().getMain().get(0));
+        zoneHand1.spawnCard(boundaryPartie.getJoueurCourant().getMain().get(1));
+        zoneHand1.spawnCard(boundaryPartie.getJoueurCourant().getMain().get(2));
+        zoneHand1.spawnCard(boundaryPartie.getJoueurCourant().getMain().get(3));
         bundles = new ArrayList();
         zoneHand1.spawnCard(null);
         cartes.getLast().setVisible(false);

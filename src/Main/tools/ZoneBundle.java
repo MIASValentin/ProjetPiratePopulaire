@@ -55,17 +55,14 @@ public class ZoneBundle extends javax.swing.JPanel {
         revalidate();
     }
     
-    public Carte getCarte1() {
-		return zoneCarte1.getCarteNf();
+    public ArrayList<Carte> getCartes() {
+    	ArrayList<Carte> temp = new ArrayList();
+    	temp.add(zoneCarte1.getCarteNf());
+    	temp.add(zoneCarte2.getCarteNf());
+    	temp.add(zoneCarte3.getCarteNf());
+		return temp;
 	}
     
-    public Carte getCarte2() {
-		return zoneCarte2.getCarteNf();
-	}
-    
-    public Carte getCarte3() {
-		return zoneCarte3.getCarteNf();
-	}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
