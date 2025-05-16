@@ -102,6 +102,7 @@ public class Deck {
             "Restaure 3 points de vie.",
             (joueur, adversaire) -> {
                 joueur.changerPv(3);
+                if (joueur.getPv() > 10) joueur.setPv(10); 
             }
         );
 
@@ -131,6 +132,7 @@ public class Deck {
             (joueur, adversaire) -> {
                 joueur.changerPv(1);
                 joueur.changerPrime(1);
+                if (joueur.getPv() > 10) joueur.setPv(10); 
             }
         );
 
