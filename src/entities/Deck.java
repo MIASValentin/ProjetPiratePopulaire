@@ -15,7 +15,10 @@ public class Deck {
 
 	
 	public Deck() {
-		this.cartes = creerCartes(); 
+		List<Carte> allCards = creerCartes();
+		Collections.shuffle(allCards);
+		this.cartes = allCards.subList(0, 5); 
+		
 	}
 	
 	public int getNbCarte() {

@@ -30,7 +30,7 @@ public class TestControlJouerCarte {
     }
 
     @Test
-    void testPiocherCarte_increasesMainSize() {
+    void testPiocherCarteIncreasesMainSize() {
         // Pirate 1's turn by default (nbTour = 0 -> player 2), force to player 1
         partie.setNbTour(1);
         // initial hand
@@ -40,13 +40,13 @@ public class TestControlJouerCarte {
     }
 
     @Test
-    void testAppliquerEffet_affectsStateAndRemovesCard() {
+    void testAppliquerEffetAffectsStateAndRemovesCard() {
         // Préparer un effet qui augmente la prime du joueur actif de 2
         EffetInstantane effetPrime = new EffetInstantane(
                 TypeCarte.SOUTIEN,
                 "Gain Prime",
                 "Ajoute 2 de prime.",
-                (origine, cible) -> origine.changerPime(2)
+                (origine, cible) -> origine.changerPrime(2)
         );
         // Mettre l'effet dans la main du joueur 1
         pirate1.getMain().add(effetPrime);
@@ -63,7 +63,7 @@ public class TestControlJouerCarte {
     }
 
     @Test
-    void testAppliquerEffet_affecteAdversaire() {
+    void testAppliquerEffetAffecteAdversaire() {
         // Préparer un effet qui inflige 4 PV à l'adversaire
         EffetInstantane effetDegats = new EffetInstantane(
                 TypeCarte.ATTAQUE,
@@ -82,19 +82,19 @@ public class TestControlJouerCarte {
     }
 
     @Test
-    void testAppliquerEffet_multipleCardsOrder() {
+    void testAppliquerEffetMultipleCardsOrder() {
         // Deux effets en main pour tester l'ordre
         EffetInstantane effet1 = new EffetInstantane(
                 TypeCarte.SOUTIEN,
                 "Prime1",
                 "+1 prime.",
-                (origine, cible) -> origine.changerPime(1)
+                (origine, cible) -> origine.changerPrime(1)
         );
         EffetInstantane effet2 = new EffetInstantane(
                 TypeCarte.SOUTIEN,
                 "Prime2",
                 "+2 prime.",
-                (origine, cible) -> origine.changerPime(2)
+                (origine, cible) -> origine.changerPrime(2)
         );
         pirate1.getMain().add(effet1);
         pirate1.getMain().add(effet2);

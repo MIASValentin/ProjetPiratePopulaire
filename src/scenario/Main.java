@@ -36,6 +36,7 @@ public class Main {
 		
 		Pirate joueurCourant;
 		
+		
 		while(!boundaryPartie.estPartieFini()) {
 			boundaryPartie.passerAuTourSuivant();
 			joueurCourant = boundaryPartie.getJoueurCourant();
@@ -55,18 +56,16 @@ public class Main {
 			
 			//Mélanger les cartes
 			boundaryPartie.melangerDeck();
+			
 			// Affichage main Joueur courant 
 			boundaryPartie.afficherMain(boundaryPartie.getTourJoueur()); 
+			
 			
 			// choix de la carte 
 			int numCarte = boundaryJouerCarte.choisirCarte(); 
 			
 			// Validation de la carte 
 			boundaryJouerCarte.appliquerEffet(numCarte); 
-			
-			// Subir les dégats
-			
-			if(boundaryPartie.getTourJoueur() == 1) boundaryPartie.subirDegat(1); else boundaryPartie.subirDegat(2); 
 			
 			// Afficher pirate
 			boundaryPartie.afficherPirate();
