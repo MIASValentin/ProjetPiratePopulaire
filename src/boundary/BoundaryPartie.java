@@ -85,7 +85,11 @@ public class BoundaryPartie {
 	
 	public String getGagnantString() {
 		int gagnant = controlPartie.getGagnant();
-		return "Le gagnant est : le joueur " + gagnant + "!";
+		String rslt = "Le gagnant est : le joueur " + gagnant + "!";
+		if (gagnant == 3) {
+			rslt = " Égalité !";
+		}
+		return rslt;
 	}
 	public void melangerDeck() {
 		controlPartie.melangerDeck();

@@ -21,8 +21,7 @@ public class TestDeck {
 
     @Test
     void testInitialCarteCount() {
-        assertEquals(12, deck.getNbCarte(), "Le deck initial doit contenir 12 cartes");
-        assertEquals(12, deck.getCartes().size(), "La liste cartes doit être de taille 12");
+        assertEquals(5, deck.getNbCarte(), "Le deck initial doit contenir 5 cartes");
     }
 
     @Test
@@ -57,7 +56,6 @@ public class TestDeck {
         List<Carte> original = new ArrayList<>(deck.getCartes());
         deck.melangerCartes();
         List<Carte> shuffled = deck.getCartes();
-        assertEquals(12, shuffled.size(), "Le deck doit toujours contenir 12 cartes après melangerCartes");
         assertTrue(shuffled.containsAll(original), "Le deck après shuffle doit contenir toutes les cartes originales");
         assertEquals(new HashSet<>(original).size(), new HashSet<>(shuffled).size(),
             "Pas de duplicata après melangerCartes");

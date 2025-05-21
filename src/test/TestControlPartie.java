@@ -124,9 +124,9 @@ public class TestControlPartie {
 
         // Égalité par deux victoires simultanées
         setUp();
-        pirate1.setPrime(5);
+        pirate1.setPv(0);
         pirate2.setPv(0);
-        assertEquals(3, controlPartie.getGagnant(), "Victoire simultanée => égalité (3)");
+        assertEquals(3, controlPartie.getGagnant(), "égalité (3)");
     }
 
     @Test
