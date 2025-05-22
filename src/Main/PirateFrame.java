@@ -40,7 +40,7 @@ public class PirateFrame extends javax.swing.JFrame {
     Image pirateIcon;
     private ArrayList<ZoneCarte> cartes = new ArrayList();
     private ArrayList<ZoneBundle> bundles = new ArrayList();
-    
+     
     private Pirate joueur1;
     private Pirate joueur2;
     private Partie partie;
@@ -140,11 +140,6 @@ public class PirateFrame extends javax.swing.JFrame {
 		boundaryPartie.initPartie(); // pioche des 4 cartes
     }
     
-    public void debutTour(){
-        
-        debutBundle();
-    }
-    
     public void finJeu() {
     	GameOver frameGO = new GameOver();
     	frameGO.setVisible(true);
@@ -170,7 +165,7 @@ public class PirateFrame extends javax.swing.JFrame {
         changerJoueur();
     }
     
-    private void debutBundle(){
+    public void debutBundle(){
         Container glassPane = (Container) this.getGlassPane();
         glassPane.setVisible(true);
         setLayout(null);
