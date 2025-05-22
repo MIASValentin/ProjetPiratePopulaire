@@ -4,6 +4,7 @@ import entities.*;
 import control.*;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -81,7 +82,11 @@ public class Main {
 	    Scanner scanner = new Scanner(System.in);
 		while(choix != 2) {
 			System.out.println("Bienvenue dans le jeu Pirate:\n-1: lancer partie\n-2: quitter");
-			choix = scanner.nextInt();
+			try {
+				choix = scanner.nextInt();
+			} catch(InputMismatchException exception) {
+				scanner.nextLine();
+			}
 			if (choix < 1 || choix > 2) {
                 System.out.println("Entrée invalide. Veuillez entrer 1 ou 2.");
             }

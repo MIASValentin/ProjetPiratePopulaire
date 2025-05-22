@@ -1,5 +1,6 @@
 package boundary;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import control.*;
@@ -12,23 +13,19 @@ public class BoundaryJouerCarte {
 	}
 
 	public int choisirCarte() {
-	    Scanner scanner = new Scanner(System.in);
 	    int choix = 0;
-
-	    while (choix < 1 || choix > 4) {
-	        System.out.print("Choisissez une carte à jouer (1 à 4) : ");
-	        if (scanner.hasNextInt()) {
-	            choix = scanner.nextInt();
-	            if (choix < 1 || choix > 4) {
-	                System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 4.");
-	            }
-	        } else {
-	            System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
-	            scanner.next();
-	        }
-	    }
-
-	    return choix;
+	    Scanner scanner = new Scanner(System.in);
+		while(choix < 1 || choix > ControlChoisirBundle.NB_BUNDLES) {
+			try {
+				choix = scanner.nextInt();
+			} catch(InputMismatchException exception) {
+				scanner.nextLine();
+			}
+			if (choix < 1 || choix > 4) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre entre 1 et 4.");
+            }
+		}
+		return choix;
 	}
 	
 	public void appliquerEffet(int numCarte) {

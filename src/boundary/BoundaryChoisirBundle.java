@@ -1,6 +1,7 @@
 package boundary;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,14 +18,23 @@ public class BoundaryChoisirBundle {
 	}
 
 	public void selectionnerBundle(List<ArrayList<Carte>> lBundles, Pirate joueur) {
-		int choix = scanner.nextInt();
+		int choix = 0;
+	    Scanner scanner = new Scanner(System.in);
 		while(choix < 1 || choix > ControlChoisirBundle.NB_BUNDLES) {
-			System.out.println("Entrée invalide, veuillez choisir un bundle (1-" + ControlChoisirBundle.NB_BUNDLES + ")");
-			choix = scanner.nextInt();
+			try {
+				choix = scanner.nextInt();
+			} catch(InputMismatchException exception) {
+				scanner.nextLine();
+			}
+			if (choix < 1 || choix > ControlChoisirBundle.NB_BUNDLES) {
+                System.out.println("Entrée invalide, veuillez choisir un bundle (1-" + ControlChoisirBundle.NB_BUNDLES + ")");
+            }
+			else {
+				System.out.println("vous avez choisi le bundle "+ choix +
+						", nous allons maintenant l'ajouter a votre deck !");
+				controlChoisirBundle.selectionnerBundle(lBundles, joueur, choix-1);
+			}
 		}
-		System.out.println("vous avez choisi le bundle "+ choix +
-				", nous allons maintenant l'ajouter a votre deck !");
-		controlChoisirBundle.selectionnerBundle(lBundles, joueur, choix-1);
 	}
 	
 	public void afficherBundle(List<ArrayList<Carte>> lBundles) {
