@@ -18,7 +18,7 @@ import entities.Carte;
 
 /**
  *
- * @author pauli
+ * @author alex
  */
 public class ZoneCarte extends javax.swing.JPanel {
     private String desc ="ceci est un texte assez long pour avoir des choses a dire meme beaucoup de choses a dire, enfait cest un test";
