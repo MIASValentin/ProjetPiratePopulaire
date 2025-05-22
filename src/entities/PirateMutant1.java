@@ -64,8 +64,6 @@ public class PirateMutant1 {
 	        }
 	        deck.getCartes().remove(piochee); 
 	    }
-	    
-	    
 	}
 	
 	public String afficherMain() {

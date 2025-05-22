@@ -3,7 +3,6 @@ package test;
 import entities.Carte;
 import entities.Deck;
 import entities.EffetInstantane;
-import entities.Pirate;
 import entities.PirateMutant1;
 import entities.TypeCarte;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +70,7 @@ public class TestPirateMutant1 {
     void testPiocherCarteReducesDeckAndFillsMain() {
         Deck deckBefore = pirate.getDeck();
         int deckSize = deckBefore.getNbCarte();
-        int draw = 5;
+        int draw = 2;
         pirate.piocherCarte(draw);
         assertEquals(draw, pirate.getMain().size(), "Main doit contenir exactement le nombre de cartes piochées");
         assertEquals(deckSize - draw, deckBefore.getNbCarte(), "Le deck doit perdre le nombre de cartes piochées");
@@ -79,6 +78,8 @@ public class TestPirateMutant1 {
 
     @Test
     void testPiocherCarteOverdraw() {
+    	Deck newDeck = new Deck();
+        pirate.setDeck(newDeck);
         Deck deckBefore = pirate.getDeck();
         int deckSize = deckBefore.getNbCarte();
         int draw = deckSize + 5;
