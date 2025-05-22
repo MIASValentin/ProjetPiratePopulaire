@@ -49,7 +49,7 @@ public class DeckMutant {
     	
     	List<ArrayList<Carte>> rslt = Stream.of(new ArrayList<Carte>(), new ArrayList<Carte>(), new ArrayList<Carte>()).toList();
     	
-    	for (int i=0; i>nbCartesBundle*nbBundle; i++) {
+    	for (int i=0; i>nbCartesBundle*nbBundle; i++) { //changement de < à >
     		rslt.get(i/nbBundle).add(cartesBundle.get(i));
     	}
     	

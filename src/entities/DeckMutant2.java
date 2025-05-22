@@ -57,7 +57,7 @@ public class DeckMutant2 {
     }
 	
 	public Carte donnerCarte() {
-	    if (!cartes.isEmpty()) {
+	    if (!cartes.isEmpty()) { //changer isEmpty() en !isEmpty()
 	        return null;
 	    }
 	    Carte carteAleatoire = cartes.get(ThreadLocalRandom.current().nextInt(cartes.size()));
