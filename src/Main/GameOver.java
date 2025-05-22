@@ -8,6 +8,7 @@ import java.awt.Color;
 
 /**
  *
+ * @author valentin
  * @author pauli
  */
 public class GameOver extends javax.swing.JFrame {

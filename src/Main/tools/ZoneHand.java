@@ -17,7 +17,8 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author pauli
+ * @author alex
+ * @author paulin
  */
 public class ZoneHand extends javax.swing.JPanel {
 

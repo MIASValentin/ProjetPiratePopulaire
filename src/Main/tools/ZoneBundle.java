@@ -19,6 +19,7 @@ import entities.Carte;
 /**
  *
  * @author pauli
+ * @author valentin
  */
 public class ZoneBundle extends javax.swing.JPanel {
 

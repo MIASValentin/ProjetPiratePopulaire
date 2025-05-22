@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 /**
  *
  * @author enzoj
+ * @author petar
  */
 public class MenuPanel extends javax.swing.JPanel {
     

@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 /**
  *
  * @author pauli
+ * @author valentin
  */
 public class ZoneDeck extends javax.swing.JPanel {
 
